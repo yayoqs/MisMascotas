@@ -1,1 +1,2094 @@
-probando probando
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#4d7c0f">
+<title>MisMascotas — Pet Shop & Alimentos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   MISMASCOTAS — Design System v2
+   Paleta naturaleza: oliva, lima, miel, teal
+   ============================================================ */
+:root{
+  --bg:#fdfcf3;
+  --bg-2:#ffffff;
+  --bg-3:#f7f6e5;
+  --ink:#1a2416;
+  --ink-2:#3d4a34;
+  --ink-3:#7a8570;
+  --line:rgba(26,36,22,.10);
+  --line-2:rgba(26,36,22,.06);
+
+  /* Brand — Oliva */
+  --brand:#4d7c0f;
+  --brand-2:#65a30d;
+  --brand-3:#a3e635;
+  --brand-soft:#ecfccb;
+  --brand-wash:#f7fee7;
+
+  /* Honey — amarillo mostaza */
+  --honey:#eab308;
+  --honey-2:#facc15;
+  --honey-soft:#fef9c3;
+  --honey-wash:#fefce8;
+
+  /* Mint */
+  --mint:#10b981;
+  --mint-2:#34d399;
+  --mint-soft:#d1fae5;
+  --mint-wash:#ecfdf5;
+
+  /* Teal (ex sky) */
+  --sky:#14b8a6;
+  --sky-2:#2dd4bf;
+  --sky-soft:#ccfbf1;
+  --sky-wash:#f0fdfa;
+
+  /* Amber */
+  --amber:#f59e0b;
+  --amber-2:#fbbf24;
+  --amber-soft:#fef3c7;
+  --amber-wash:#fffbeb;
+
+  /* Lime (ex violet) */
+  --violet:#84cc16;
+  --violet-2:#a3e635;
+  --violet-soft:#ecfccb;
+  --violet-wash:#f7fee7;
+
+  /* Red */
+  --coral:#dc2626;
+  --coral-soft:#fee2e2;
+  --coral-wash:#fef2f2;
+
+  /* Sidebar — Forest */
+  --nav-bg:#0f1f12;
+  --nav-bg-2:#08150a;
+  --nav-text:#c8dcc4;
+  --nav-text-2:#5f7a56;
+  --nav-active:#facc15;
+
+  --wa:#25d366;
+  --wa-dark:#128c7e;
+
+  --shadow-sm: 0 2px 6px rgba(26,36,22,.06);
+  --shadow: 0 6px 20px rgba(26,36,22,.08);
+  --shadow-lg: 0 14px 40px rgba(26,36,22,.14);
+  --shadow-brand: 0 8px 24px rgba(77,124,15,.28);
+  --shadow-honey: 0 8px 24px rgba(234,179,8,.28);
+  --shadow-mint: 0 8px 24px rgba(16,185,129,.28);
+  --shadow-sky: 0 8px 24px rgba(20,184,166,.28);
+
+  --safe-t:env(safe-area-inset-top,0px);
+  --safe-b:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;}
+html,body{height:100%; margin:0;}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,sans-serif;
+  -webkit-font-smoothing:antialiased; font-size:15px; line-height:1.5;
+  overscroll-behavior-y:none;
+}
+h1,h2,h3,h4,.font-display{font-family:"Outfit",sans-serif; margin:0; letter-spacing:-.02em; font-weight:800; color:var(--ink);}
+p{margin:0;}
+button{font-family:inherit; cursor:pointer; -webkit-tap-highlight-color:transparent; border:none; background:none; color:inherit;}
+input,select,textarea{font-family:inherit;}
+::selection{background:var(--brand-soft); color:var(--ink);}
+::-webkit-scrollbar{width:10px; height:10px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:rgba(26,36,22,.14); border-radius:10px; border:2px solid var(--bg);}
+::-webkit-scrollbar-thumb:hover{background:rgba(26,36,22,.25);}
+
+/* ============================================================
+   SHELL
+   ============================================================ */
+.shell{display:grid; grid-template-columns:250px 1fr; grid-template-rows:64px 1fr; min-height:100vh; min-height:100dvh;}
+.topbar{
+  grid-column:1/3; display:flex; align-items:center; gap:14px;
+  padding:0 22px; padding-top:var(--safe-t);
+  height:calc(64px + var(--safe-t));
+  background:rgba(253,252,243,.85); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+  position:sticky; top:0; z-index:30;
+}
+.menu-btn{display:none; padding:8px; border-radius:12px; color:var(--ink); width:42px; height:42px; align-items:center; justify-content:center; background:var(--bg-2); border:1px solid var(--line);}
+.menu-btn svg{width:22px; height:22px;}
+.menu-btn:active{transform:scale(.95);}
+
+.brand{display:flex; align-items:center; gap:10px; font-family:"Outfit",sans-serif;}
+.brand-mark{
+  width:38px; height:38px; border-radius:12px; flex:none;
+  background:linear-gradient(135deg,var(--brand),var(--brand-2));
+  display:flex; align-items:center; justify-content:center; color:#fff;
+  box-shadow:var(--shadow-brand); position:relative; overflow:hidden; font-size:20px;
+}
+.brand-text{display:flex; flex-direction:column; line-height:1;}
+.brand-name{font-size:1.05rem; font-weight:900; letter-spacing:-.02em; color:var(--ink);}
+.brand-sub{font-family:"Plus Jakarta Sans",sans-serif; font-size:.66rem; color:var(--ink-3); font-weight:500; margin-top:2px;}
+
+.space-pill{margin-left:auto; display:flex; align-items:center; gap:8px; font-size:.8rem; color:var(--ink-2); font-weight:600; padding:7px 14px; border-radius:100px; background:var(--brand-soft);}
+.space-pill .dot{width:7px; height:7px; border-radius:50%; background:var(--mint); box-shadow:0 0 0 3px rgba(16,185,129,.2); animation:pulse-dot 2s ease-in-out infinite;}
+@keyframes pulse-dot{0%,100%{box-shadow:0 0 0 3px rgba(16,185,129,.2);} 50%{box-shadow:0 0 0 6px rgba(16,185,129,.05);}}
+.shift-pill{display:flex; align-items:center; gap:8px; padding:7px 14px; border-radius:100px; background:var(--honey-soft); color:#78350f; font-size:.78rem; font-weight:600;}
+.shift-pill b{font-weight:800;}
+.shift-pill::before{content:"⏱"; font-size:.9rem;}
+
+/* ---------- Sidebar ---------- */
+.sidebar{position:relative; background:var(--nav-bg); color:var(--nav-text); padding:20px 0 20px 22px; overflow-y:auto; border-right:1px solid rgba(0,0,0,.2);}
+.sidebar::before{
+  content:""; position:absolute; left:0; top:0; bottom:0; width:6px;
+  background:linear-gradient(to bottom,
+    var(--brand-2) 0%, var(--brand-2) 20%,
+    var(--honey-2) 20%, var(--honey-2) 40%,
+    var(--mint-2) 40%, var(--mint-2) 60%,
+    var(--sky-2) 60%, var(--sky-2) 80%,
+    var(--brand-2) 80%, var(--brand-2) 100%);
+  opacity:.9;
+}
+.nav-group-label{font-size:.66rem; text-transform:uppercase; letter-spacing:.12em; color:var(--nav-text-2); font-weight:700; margin:20px 0 10px;}
+.nav-group-label:first-child{margin-top:4px;}
+nav.modules{display:flex; flex-direction:column; gap:2px;}
+.nav-item{
+  display:flex; align-items:center; gap:11px; padding:11px 16px 11px 12px;
+  border-radius:12px 0 0 12px; color:var(--nav-text); font-size:.88rem;
+  text-align:left; width:100%; font-weight:500; position:relative;
+  transition:background .14s ease, color .14s ease;
+}
+.nav-item .ic{width:19px; height:19px; flex:none; opacity:.75; transition:opacity .14s ease;}
+.nav-item:hover{background:rgba(255,255,255,.06); color:#fff;}
+.nav-item:hover .ic{opacity:1;}
+.nav-item.active{background:linear-gradient(90deg, rgba(250,204,21,.28), rgba(101,163,13,.12)); color:#fff; font-weight:700; box-shadow:inset 3px 0 0 var(--nav-active);}
+.nav-item.active .ic{opacity:1; color:var(--nav-active);}
+.nav-item .badge{margin-left:auto; font-size:.66rem; background:var(--honey); color:#3f2a00; padding:2px 8px; border-radius:100px; font-weight:800; box-shadow:0 2px 6px rgba(234,179,8,.4);}
+
+.drawer-overlay{display:none; position:fixed; inset:0; background:rgba(15,31,18,.5); backdrop-filter:blur(2px); z-index:38; opacity:0; transition:opacity .22s ease;}
+.drawer-overlay.on{display:block; opacity:1;}
+
+main{
+  overflow-y:auto; padding:28px 36px 80px; min-width:0; position:relative;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(163,230,53,.10), transparent 40%),
+    radial-gradient(circle at 0% 100%, rgba(234,179,8,.07), transparent 40%),
+    var(--bg);
+}
+.view{display:none; animation:fade-up .3s cubic-bezier(.2,.9,.3,1);}
+.view.active{display:block;}
+@keyframes fade-up{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);}}
+.view-head{display:flex; align-items:flex-end; justify-content:space-between; gap:16px; margin-bottom:24px; flex-wrap:wrap;}
+.view-head h1{font-size:1.85rem; font-weight:800; letter-spacing:-.03em;}
+.view-head .sub{color:var(--ink-3); font-size:.88rem; margin-top:5px; font-weight:500;}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  padding:11px 18px; border-radius:13px; font-size:.86rem; font-weight:700;
+  background:linear-gradient(135deg,var(--brand),var(--brand-2));
+  color:#fff; min-height:44px; letter-spacing:-.01em;
+  box-shadow:var(--shadow-brand); transition:transform .12s ease, box-shadow .12s ease, filter .12s ease;
+  border:none;
+}
+.btn:hover{filter:brightness(1.06);}
+.btn:active{transform:translateY(1px) scale(.99);}
+.btn.ghost{background:var(--bg-2); color:var(--ink); border:1.5px solid var(--line); box-shadow:var(--shadow-sm);}
+.btn.ghost:hover{border-color:var(--brand-3); background:var(--brand-wash);}
+.btn.honey{background:linear-gradient(135deg,var(--honey),var(--honey-2)); color:#3f2a00; box-shadow:var(--shadow-honey);}
+.btn.mint{background:linear-gradient(135deg,var(--mint),var(--mint-2)); box-shadow:var(--shadow-mint); color:#fff;}
+.btn.sky{background:linear-gradient(135deg,var(--sky),var(--sky-2)); box-shadow:var(--shadow-sky); color:#fff;}
+.btn.wa{background:linear-gradient(135deg,var(--wa),var(--wa-dark)); box-shadow:0 8px 24px rgba(37,211,102,.32); color:#fff;}
+.btn.full{width:100%;}
+
+/* ============================================================
+   CARDS / GRID
+   ============================================================ */
+.grid{display:grid; gap:18px;}
+.g4{grid-template-columns:repeat(4,1fr);}
+.g3{grid-template-columns:repeat(3,1fr);}
+.g2{grid-template-columns:1.35fr .9fr;}
+
+.card{background:var(--bg-2); border:1px solid var(--line); border-radius:20px; padding:20px; box-shadow:var(--shadow-sm); transition:box-shadow .18s ease, transform .18s ease;}
+.card.hoverable:hover{box-shadow:var(--shadow); transform:translateY(-1px);}
+
+.kpi{background:var(--bg-2); border:1px solid var(--line); border-radius:20px; padding:18px; box-shadow:var(--shadow-sm); display:flex; flex-direction:column; gap:10px; position:relative; overflow:hidden;}
+.kpi::after{content:""; position:absolute; right:-20px; top:-20px; width:80px; height:80px; border-radius:50%; opacity:.09; background:var(--kpi-color, var(--brand));}
+.kpi-icon{
+  width:42px; height:42px; border-radius:13px; display:flex; align-items:center; justify-content:center;
+  color:#fff; position:relative; z-index:1;
+  background:linear-gradient(135deg, var(--kpi-color, var(--brand)), var(--kpi-color-2, var(--brand-2)));
+  box-shadow:0 6px 16px color-mix(in srgb, var(--kpi-color, var(--brand)) 35%, transparent);
+  font-size:20px;
+}
+.kpi-icon svg{width:22px; height:22px;}
+.kpi .label{font-size:.74rem; color:var(--ink-3); font-weight:600; letter-spacing:.02em; text-transform:uppercase;}
+.kpi .value{font-family:"Outfit",sans-serif; font-size:1.9rem; font-weight:800; letter-spacing:-.03em; line-height:1;}
+.kpi .delta{font-size:.76rem; font-weight:700; display:inline-flex; align-items:center; gap:4px;}
+.kpi .delta.up{color:var(--mint);}
+.kpi .delta.down{color:var(--coral);}
+.kpi .delta.neutral{color:var(--ink-3);}
+
+.section-title{font-family:"Outfit",sans-serif; font-size:1.1rem; font-weight:800; margin:32px 0 14px; display:flex; align-items:center; justify-content:space-between; letter-spacing:-.02em;}
+.section-title .link{font-size:.8rem; font-weight:700; color:var(--brand); cursor:pointer;}
+
+.alert-row{display:flex; align-items:center; gap:14px; padding:12px 0; border-bottom:1px solid var(--line-2);}
+.alert-row:last-child{border-bottom:none;}
+.alert-dot{width:10px; height:10px; border-radius:50%; flex:none; background:var(--coral); box-shadow:0 0 0 4px var(--coral-soft);}
+.alert-row.warn .alert-dot{background:var(--amber); box-shadow:0 0 0 4px var(--amber-soft);}
+.alert-row .t{flex:1; font-size:.86rem; font-weight:600; color:var(--ink);}
+.alert-row .t small{display:block; color:var(--ink-3); font-size:.74rem; margin-top:3px; font-weight:500;}
+
+.mini-order{display:flex; justify-content:space-between; align-items:center; padding:11px 0; border-bottom:1px solid var(--line-2); font-size:.85rem; font-weight:600;}
+.mini-order:last-child{border-bottom:none;}
+
+.tag{font-size:.68rem; font-weight:800; padding:4px 11px; border-radius:100px; letter-spacing:.02em; text-transform:uppercase; display:inline-flex; align-items:center; gap:5px;}
+.tag::before{content:""; width:6px; height:6px; border-radius:50%; background:currentColor;}
+.tag.pendiente{background:var(--sky-soft); color:#0f766e;}
+.tag.preparando{background:var(--amber-soft); color:#b45309;}
+.tag.reparto{background:var(--violet-soft); color:var(--brand);}
+.tag.entregado{background:var(--mint-soft); color:#047857;}
+.tag.pausada{background:rgba(26,36,22,.08); color:var(--ink-3);}
+.tag.reponer{background:var(--coral-soft); color:var(--coral);}
+.tag.activa{background:var(--mint-soft); color:#047857;}
+
+/* ============================================================
+   CATALOG
+   ============================================================ */
+.toolbar{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:22px; align-items:center;}
+.toolbar input[type=search]{
+  flex:1; min-width:200px; padding:12px 18px 12px 44px; border-radius:14px;
+  border:1.5px solid var(--line); background:var(--bg-2); color:var(--ink);
+  font-size:.88rem; font-weight:500; min-height:46px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237a8570' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:14px center; background-size:20px;
+  box-shadow:var(--shadow-sm);
+  transition:border-color .15s ease, box-shadow .15s ease;
+}
+.toolbar input[type=search]:focus{outline:none; border-color:var(--brand); box-shadow:0 0 0 4px var(--brand-soft);}
+
+.chip-select{display:flex; gap:8px; flex-wrap:wrap;}
+.chip{padding:9px 16px; border-radius:100px; font-size:.82rem; font-weight:700; background:var(--bg-2); color:var(--ink-2); border:1.5px solid var(--line); min-height:38px; transition:all .14s ease; cursor:pointer;}
+.chip:hover{border-color:var(--brand-3); color:var(--brand);}
+.chip.on{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff; border-color:transparent; box-shadow:var(--shadow-brand);}
+
+.prod-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+.prod-card{background:var(--bg-2); border:1px solid var(--line); border-radius:20px; overflow:hidden; display:flex; flex-direction:column; box-shadow:var(--shadow-sm); transition:transform .2s ease, box-shadow .2s ease;}
+.prod-card:hover{transform:translateY(-3px); box-shadow:var(--shadow-lg);}
+.prod-swatch{height:120px; position:relative; display:flex; align-items:flex-end; padding:14px; background-image:radial-gradient(circle at 30% 20%, rgba(255,255,255,.5), transparent 60%);}
+.prod-emoji{position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:52px; opacity:.85; filter:drop-shadow(0 4px 8px rgba(0,0,0,.08));}
+.prod-swatch .code{font-size:.7rem; font-weight:800; color:rgba(0,0,0,.65); background:rgba(255,255,255,.85); padding:4px 10px; border-radius:100px; backdrop-filter:blur(4px); letter-spacing:.02em; position:relative; z-index:1;}
+.prod-promo{position:absolute; top:14px; right:14px; background:linear-gradient(135deg,var(--honey),var(--amber)); color:#3f2a00; font-size:.68rem; font-weight:800; padding:5px 12px; border-radius:100px; box-shadow:var(--shadow-honey); letter-spacing:.03em; text-transform:uppercase; z-index:2;}
+.prod-body{padding:16px; display:flex; flex-direction:column; gap:8px; flex:1;}
+.prod-body h3{font-size:1rem; font-weight:700; letter-spacing:-.02em;}
+.prod-specs{font-size:.76rem; color:var(--ink-3); line-height:1.5; font-weight:500;}
+.prod-foot{display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:12px; gap:8px; flex-wrap:wrap;}
+.prod-price{font-family:"Outfit",sans-serif; font-weight:800; font-size:1.25rem; letter-spacing:-.03em; color:var(--ink);}
+.prod-stock{font-size:.72rem; color:var(--mint); font-weight:700; background:var(--mint-soft); padding:4px 10px; border-radius:100px;}
+.prod-stock.low{color:var(--coral); background:var(--coral-soft);}
+
+/* ============================================================
+   RACIONADOR
+   ============================================================ */
+.racionador-wrap{display:grid; grid-template-columns:1.1fr .85fr; gap:24px; align-items:start;}
+.opt-block{margin-bottom:26px;}
+.opt-block .opt-label{font-size:.82rem; font-weight:800; margin-bottom:12px; display:flex; justify-content:space-between; gap:8px; flex-wrap:wrap; color:var(--ink);}
+.opt-block .opt-label .hint{font-weight:500; color:var(--ink-3); font-size:.74rem;}
+.seg{display:flex; flex-wrap:wrap; gap:9px;}
+.seg button{
+  padding:11px 17px; border-radius:14px; border:1.5px solid var(--line);
+  background:var(--bg-2); font-size:.84rem; color:var(--ink-2);
+  font-weight:700; min-height:46px; cursor:pointer;
+  transition:all .14s ease;
+  display:inline-flex; align-items:center; gap:6px;
+}
+.seg button:hover{border-color:var(--brand-3); color:var(--brand);}
+.seg button.on{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff; border-color:transparent; box-shadow:var(--shadow-brand); transform:translateY(-1px);}
+.seg.especies button{padding:13px 18px; font-size:.88rem;}
+.seg.especies button .emoji{font-size:20px; line-height:1;}
+
+.weight-input{display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
+.weight-input input{width:140px; padding:14px 16px; border-radius:14px; border:2px solid var(--line); background:var(--bg-2); color:var(--ink); font-size:1.4rem; font-weight:800; font-family:"Outfit",sans-serif; text-align:center; letter-spacing:-.02em; transition:all .15s ease;}
+.weight-input input:focus{outline:none; border-color:var(--brand); box-shadow:0 0 0 4px var(--brand-soft);}
+.weight-input span{font-size:1rem; color:var(--ink-3); font-weight:700;}
+
+.needs-grid{display:flex; flex-wrap:wrap; gap:8px;}
+.need-chip{padding:9px 16px; border-radius:100px; font-size:.82rem; font-weight:700; background:var(--bg-2); color:var(--ink-2); border:1.5px solid var(--line); min-height:40px; cursor:pointer; transition:all .14s ease; display:inline-flex; align-items:center; gap:6px;}
+.need-chip:hover{border-color:var(--brand-3); color:var(--brand);}
+.need-chip.on{background:linear-gradient(135deg,var(--mint),var(--mint-2)); color:#fff; border-color:transparent; box-shadow:var(--shadow-mint);}
+.need-chip.on::before{content:"✓ "; font-weight:900;}
+
+.summary-card{
+  position:sticky; top:24px;
+  background:var(--bg-2); border:1px solid var(--line);
+  border-radius:22px; padding:22px; display:flex; flex-direction:column; gap:16px;
+  box-shadow:var(--shadow);
+  overflow:hidden; position:relative;
+}
+.summary-card::before{content:""; position:absolute; top:0; left:0; right:0; height:5px; background:linear-gradient(90deg,var(--brand),var(--honey),var(--mint),var(--sky));}
+.summary-card h3{font-size:1.05rem; font-weight:800; margin-top:6px; display:flex; align-items:center; gap:8px;}
+.summary-card h3::before{content:"🌿"; font-size:1.1rem;}
+#racion-desc{font-size:.82rem; color:var(--ink-2); font-weight:500; line-height:1.55;}
+
+.bowl-card{
+  background:linear-gradient(135deg,#0f1f12 0%, #14532d 60%, #166534 100%);
+  color:#fff; border-radius:20px; padding:24px; text-align:center;
+  display:flex; flex-direction:column; gap:8px; align-items:center;
+  box-shadow:0 20px 50px rgba(20,83,45,.32); position:relative; overflow:hidden;
+}
+.bowl-card::before, .bowl-card::after{content:""; position:absolute; border-radius:50%; opacity:.18;}
+.bowl-card::before{width:180px; height:180px; top:-70px; right:-60px; background:radial-gradient(circle, #facc15, transparent 70%);}
+.bowl-card::after{width:140px; height:140px; bottom:-50px; left:-40px; background:radial-gradient(circle, #a3e635, transparent 70%);}
+.bowl-emoji{font-size:56px; line-height:1; position:relative; z-index:1; filter:drop-shadow(0 6px 12px rgba(0,0,0,.25));}
+.bowl-grams{font-family:"Outfit",sans-serif; font-size:3rem; font-weight:900; color:#fef9c3; line-height:1; letter-spacing:-.04em; position:relative; z-index:1; text-shadow:0 4px 16px rgba(0,0,0,.25);}
+.bowl-label{font-size:.78rem; color:#bef264; letter-spacing:.15em; font-weight:800; text-transform:uppercase; position:relative; z-index:1;}
+.bowl-sub{font-size:.85rem; color:#ecfccb; opacity:.9; font-weight:600; position:relative; z-index:1; margin-top:4px;}
+
+.info-stack{display:flex; flex-direction:column; border-radius:14px; overflow:hidden; border:1px solid var(--line); background:var(--bg-3);}
+.info-row{display:flex; justify-content:space-between; align-items:center; padding:12px 14px; font-size:.82rem; border-bottom:1px solid var(--line-2); gap:10px; font-weight:600;}
+.info-row:last-child{border-bottom:none;}
+.info-row:nth-child(1){background:var(--brand-wash);}
+.info-row:nth-child(2){background:var(--honey-wash);}
+.info-row:nth-child(3){background:var(--mint-wash);}
+.info-row:nth-child(4){background:var(--sky-wash);}
+.info-row .n{color:var(--ink-2);}
+.info-row .v{font-weight:800; font-variant-numeric:tabular-nums; white-space:nowrap; color:var(--ink); font-family:"Outfit",sans-serif;}
+
+.total-row{display:flex; justify-content:space-between; align-items:baseline; padding-top:12px; border-top:2px dashed var(--line); margin-top:4px;}
+.total-row .lbl{font-size:.84rem; color:var(--ink-3); font-weight:700; text-transform:uppercase; letter-spacing:.06em;}
+.total-row .amt{font-family:"Outfit",sans-serif; font-size:2rem; font-weight:900; letter-spacing:-.04em; background:linear-gradient(135deg,var(--brand),var(--honey)); -webkit-background-clip:text; background-clip:text; color:transparent;}
+.est-badge{font-size:.76rem; color:var(--ink-2); background:var(--bg-3); padding:10px 12px; border-radius:12px; font-weight:600; line-height:1.5; border:1px solid var(--line-2);}
+
+/* ============================================================
+   COTIZADOR
+   ============================================================ */
+.quick-wrap{display:grid; grid-template-columns:1.15fr .85fr; gap:24px; align-items:start;}
+.quick-card{background:var(--bg-2); border:1px solid var(--line); border-radius:20px; padding:20px; margin-bottom:16px; box-shadow:var(--shadow-sm);}
+.quick-card h3{font-size:.86rem; margin-bottom:14px; color:var(--ink); letter-spacing:.02em; text-transform:uppercase; font-weight:800; display:flex; align-items:center; gap:8px;}
+.quick-card h3::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--brand);}
+.big-seg{display:grid; grid-template-columns:repeat(5,1fr); gap:8px;}
+.big-seg button{padding:14px 6px; border-radius:14px; border:2px solid var(--line); background:var(--bg-2); font-size:.95rem; font-weight:800; color:var(--ink-2); min-height:60px; cursor:pointer; transition:all .14s ease; font-family:"Outfit",sans-serif;}
+.big-seg button:hover{border-color:var(--brand-3); color:var(--brand);}
+.big-seg button.on{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff; border-color:transparent; box-shadow:var(--shadow-brand); transform:translateY(-2px);}
+.big-seg.thick button{font-size:.86rem;}
+.big-seg.species-grid{grid-template-columns:repeat(4,1fr);}
+.big-seg.species-grid button{flex-direction:column; gap:4px; display:flex; align-items:center; justify-content:center;}
+.big-seg.species-grid .emoji{font-size:26px;}
+
+.quick-side{position:sticky; top:24px; display:flex; flex-direction:column; gap:14px;}
+.price-display{
+  background:linear-gradient(135deg,#0f1f12 0%, #14532d 60%, #065f46 100%);
+  color:#fff; border-radius:22px; padding:28px 24px; text-align:center;
+  display:flex; flex-direction:column; gap:8px;
+  box-shadow:0 20px 50px rgba(20,83,45,.35); position:relative; overflow:hidden;
+}
+.price-display::before, .price-display::after{content:""; position:absolute; border-radius:50%; opacity:.18;}
+.price-display::before{width:180px; height:180px; top:-70px; right:-60px; background:radial-gradient(circle, #facc15, transparent 70%);}
+.price-display::after{width:140px; height:140px; bottom:-50px; left:-40px; background:radial-gradient(circle, #a3e635, transparent 70%);}
+.price-display .lbl{font-size:.72rem; color:#bef264; opacity:.9; letter-spacing:.15em; font-weight:800; text-transform:uppercase; position:relative; z-index:1;}
+.price-display .amt{font-family:"Outfit",sans-serif; font-size:3rem; font-weight:900; color:#fef9c3; line-height:1; letter-spacing:-.04em; position:relative; z-index:1; text-shadow:0 4px 16px rgba(0,0,0,.25);}
+.price-display .sub{font-size:.82rem; opacity:.85; position:relative; z-index:1; font-weight:500; color:#d9f99d;}
+.share-row{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+.share-row .btn{font-size:.82rem; padding:12px 14px;}
+
+/* ============================================================
+   POS
+   ============================================================ */
+.pos-wrap{display:grid; grid-template-columns:1.15fr .85fr; gap:24px;}
+.pos-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:13px;}
+.pos-item{background:var(--bg-2); border:1.5px solid var(--line); border-radius:16px; padding:14px; text-align:left; display:flex; flex-direction:column; gap:7px; min-height:88px; cursor:pointer; transition:all .14s ease;}
+.pos-item:hover{border-color:var(--brand); background:var(--brand-wash); transform:translateY(-2px); box-shadow:var(--shadow);}
+.pos-item:active{transform:translateY(0) scale(.98);}
+.pos-item .nm{font-size:.84rem; font-weight:700; color:var(--ink);}
+.pos-item .pr{font-size:.82rem; color:var(--brand); font-weight:800; font-family:"Outfit",sans-serif;}
+.cart{display:flex; flex-direction:column; gap:0;}
+.cart-row{display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--line-2); font-size:.85rem; gap:10px; font-weight:600;}
+.cart-row:last-child{border-bottom:none;}
+.cart-row button.rm{background:var(--coral-soft); border:none; color:var(--coral); font-size:.72rem; font-weight:800; padding:5px 10px; border-radius:100px; cursor:pointer; transition:all .14s ease;}
+.cart-row button.rm:hover{background:var(--coral); color:#fff;}
+.pay-methods{display:flex; gap:8px; flex-wrap:wrap; margin-top:14px;}
+
+/* ============================================================
+   KANBAN
+   ============================================================ */
+.kanban{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; align-items:start;}
+.kcol{background:var(--bg-2); border:1px solid var(--line); border-radius:18px; padding:14px; min-height:200px; box-shadow:var(--shadow-sm);}
+.kcol h3{font-size:.78rem; font-weight:800; margin-bottom:12px; color:var(--ink-2); text-transform:uppercase; letter-spacing:.08em; display:flex; align-items:center; justify-content:space-between;}
+.kcol:nth-child(1) h3::before{content:""; width:8px; height:8px; border-radius:50%; background:var(--sky); margin-right:8px; display:inline-block;}
+.kcol:nth-child(2) h3::before{content:""; width:8px; height:8px; border-radius:50%; background:var(--honey); margin-right:8px; display:inline-block;}
+.kcol:nth-child(3) h3::before{content:""; width:8px; height:8px; border-radius:50%; background:var(--brand); margin-right:8px; display:inline-block;}
+.kcol:nth-child(4) h3::before{content:""; width:8px; height:8px; border-radius:50%; background:var(--mint); margin-right:8px; display:inline-block;}
+
+.kcard{background:var(--bg-3); border:1.5px solid var(--line-2); border-radius:14px; padding:14px; margin-bottom:10px; font-size:.78rem; display:flex; flex-direction:column; gap:6px; transition:all .14s ease; cursor:pointer; position:relative; border-left:3px solid var(--brand-3);}
+.kcard:hover{transform:translateY(-2px); box-shadow:var(--shadow); background:var(--bg-2);}
+.kcard .id{font-weight:800; font-size:.85rem; font-family:"Outfit",sans-serif; letter-spacing:-.01em;}
+.kcard .meta{color:var(--ink-3); font-size:.74rem; font-weight:600;}
+.kcard .fecha{margin-top:2px; font-size:.7rem; color:var(--brand); font-weight:800;}
+.kcard .pet-emoji{font-size:24px; line-height:1;}
+
+/* ============================================================
+   TABLES
+   ============================================================ */
+.table-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch;}
+table.data{width:100%; border-collapse:collapse; font-size:.84rem; background:var(--bg-2); border-radius:16px; overflow:hidden; box-shadow:var(--shadow-sm);}
+table.data th{text-align:left; font-weight:800; color:var(--ink-3); font-size:.7rem; padding:14px 16px; background:var(--bg-3); text-transform:uppercase; letter-spacing:.06em; border-bottom:1.5px solid var(--line);}
+table.data td{padding:14px 16px; border-bottom:1px solid var(--line-2); vertical-align:middle; font-weight:500;}
+table.data tr:last-child td{border-bottom:none;}
+table.data tr:hover td{background:var(--brand-wash);}
+table.data tr:hover td:first-child{font-weight:700;}
+.stockbar{width:100px; height:8px; border-radius:5px; background:var(--bg-3); overflow:hidden;}
+.stockbar i{display:block; height:100%; background:linear-gradient(90deg,var(--mint),var(--mint-2)); border-radius:5px; transition:width .3s ease;}
+.stockbar.low i{background:linear-gradient(90deg,var(--coral),var(--honey));}
+
+/* ============================================================
+   VITRINA
+   ============================================================ */
+.vitrina{
+  background:linear-gradient(135deg,#0f1f12 0%, #14532d 45%, #065f46 100%);
+  color:#fff; border-radius:24px; padding:40px;
+  box-shadow:0 24px 60px rgba(20,83,45,.35); position:relative; overflow:hidden;
+}
+.vitrina::before{content:""; position:absolute; width:340px; height:340px; border-radius:50%; background:radial-gradient(circle, rgba(250,204,21,.25), transparent 70%); top:-120px; right:-100px; pointer-events:none;}
+.vitrina::after{content:""; position:absolute; width:260px; height:260px; border-radius:50%; background:radial-gradient(circle, rgba(163,230,53,.28), transparent 70%); bottom:-100px; left:-80px; pointer-events:none;}
+.vitrina h2{color:#fef9c3; font-size:2rem; font-weight:900; letter-spacing:-.03em; position:relative; z-index:1; display:flex; align-items:center; gap:12px;}
+.vitrina .sub{color:#d9f99d; opacity:.9; margin-top:8px; font-size:.9rem; font-weight:500; position:relative; z-index:1;}
+.vitrina-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:28px; position:relative; z-index:1;}
+.vitem{background:rgba(255,255,255,.07); border:1.5px solid rgba(255,255,255,.14); border-radius:18px; padding:20px; backdrop-filter:blur(8px); transition:all .2s ease; display:flex; gap:14px; align-items:flex-start;}
+.vitem:hover{background:rgba(255,255,255,.12); border-color:rgba(255,255,255,.28); transform:translateY(-3px);}
+.vitem .vemoji{font-size:36px; line-height:1;}
+.vitem .vinfo{flex:1;}
+.vitem .nm{font-family:"Outfit",sans-serif; font-size:1.05rem; color:#fff; font-weight:800; letter-spacing:-.02em;}
+.vitem .desc{font-size:.78rem; color:#d9f99d; opacity:.82; margin:6px 0 10px; font-weight:500;}
+.vitem .pr{font-size:1.3rem; font-weight:900; color:#facc15; font-family:"Outfit",sans-serif; letter-spacing:-.03em;}
+
+/* ============================================================
+   REPORTES
+   ============================================================ */
+.bar-chart{display:flex; align-items:flex-end; gap:12px; height:180px; padding-top:14px;}
+.bar-chart .col{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; gap:8px;}
+.bar-chart .col i{width:100%; border-radius:8px 8px 0 0; background:linear-gradient(180deg,var(--brand-2),var(--brand)); transition:all .25s ease; box-shadow:0 4px 12px rgba(77,124,15,.25);}
+.bar-chart .col:nth-child(2n) i{background:linear-gradient(180deg,var(--honey-2),var(--honey)); box-shadow:0 4px 12px rgba(234,179,8,.25);}
+.bar-chart .col:nth-child(3n) i{background:linear-gradient(180deg,var(--mint-2),var(--mint)); box-shadow:0 4px 12px rgba(16,185,129,.25);}
+.bar-chart .col:nth-child(5n) i{background:linear-gradient(180deg,var(--sky-2),var(--sky)); box-shadow:0 4px 12px rgba(20,184,166,.25);}
+.bar-chart .col:hover i{filter:brightness(1.1); transform:scaleY(1.04); transform-origin:bottom;}
+.bar-chart .col span{font-size:.72rem; color:var(--ink-3); font-weight:700; text-transform:uppercase;}
+
+.two-col-note{display:flex; gap:16px; margin-top:20px; flex-wrap:wrap;}
+.note-card{flex:1; min-width:240px; border-radius:18px; padding:18px; font-size:.84rem; font-weight:600; line-height:1.55; box-shadow:var(--shadow-sm); border:1px solid var(--line);}
+.note-card:nth-child(1){background:linear-gradient(135deg,var(--brand-wash),var(--honey-wash)); color:var(--ink);}
+.note-card:nth-child(2){background:linear-gradient(135deg,var(--mint-wash),var(--sky-wash)); color:var(--ink);}
+
+/* ============================================================
+   MASCOTAS
+   ============================================================ */
+.pets-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+.pet-card{background:var(--bg-2); border:1px solid var(--line); border-radius:20px; padding:18px; box-shadow:var(--shadow-sm); display:flex; flex-direction:column; gap:12px; transition:transform .18s ease, box-shadow .18s ease;}
+.pet-card:hover{transform:translateY(-3px); box-shadow:var(--shadow-lg);}
+.pet-head{display:flex; gap:14px; align-items:center;}
+.pet-avatar{width:56px; height:56px; border-radius:50%; flex:none; display:flex; align-items:center; justify-content:center; font-size:30px; background:var(--pet-bg, var(--brand-soft)); border:2px solid var(--pet-ring, var(--brand-3));}
+.pet-info{flex:1; min-width:0;}
+.pet-name{font-family:"Outfit",sans-serif; font-size:1.05rem; font-weight:800; letter-spacing:-.02em;}
+.pet-meta{font-size:.76rem; color:var(--ink-3); font-weight:600; margin-top:2px;}
+.pet-rows{display:flex; flex-direction:column; gap:6px; font-size:.78rem;}
+.pet-row{display:flex; justify-content:space-between; align-items:center; gap:8px;}
+.pet-row .k{color:var(--ink-3); font-weight:600;}
+.pet-row .v{font-weight:700; color:var(--ink); text-align:right;}
+
+/* ============================================================
+   POST-VENTA — Módulo nuevo
+   ============================================================ */
+.recompra-list{display:flex; flex-direction:column; gap:2px;}
+.recompra-row{
+  display:flex; align-items:center; gap:14px; padding:14px 4px;
+  border-bottom:1px solid var(--line-2); transition:background .14s ease;
+}
+.recompra-row:hover{background:var(--brand-wash); border-radius:12px; padding-left:12px; padding-right:12px;}
+.recompra-row:last-child{border-bottom:none;}
+.recompra-pet{
+  width:44px; height:44px; border-radius:50%; flex:none;
+  display:flex; align-items:center; justify-content:center; font-size:22px;
+  background:var(--pet-bg, var(--brand-soft)); border:2px solid var(--pet-ring, var(--brand-3));
+}
+.recompra-info{flex:1; min-width:0;}
+.recompra-title{font-family:"Outfit",sans-serif; font-weight:800; font-size:.92rem; letter-spacing:-.01em; display:flex; align-items:center; gap:6px;}
+.recompra-owner{color:var(--ink-3); font-weight:600; font-size:.76rem; font-family:"Plus Jakarta Sans",sans-serif;}
+.recompra-detail{font-size:.74rem; color:var(--ink-3); font-weight:500; margin-top:3px;}
+.recompra-days{
+  font-family:"Outfit",sans-serif; font-weight:900; font-size:1.05rem;
+  letter-spacing:-.02em; padding:8px 12px; border-radius:12px;
+  background:var(--mint-soft); color:#047857; min-width:74px; text-align:center; line-height:1;
+}
+.recompra-days span{font-size:.62rem; display:block; font-weight:700; margin-top:2px; opacity:.8; letter-spacing:.04em; text-transform:uppercase;}
+.recompra-days.urgent{background:var(--coral-soft); color:var(--coral);}
+.recompra-days.warn{background:var(--honey-soft); color:#a16207;}
+.recompra-actions{display:flex; gap:6px; flex:none;}
+.icon-btn{
+  width:38px; height:38px; border-radius:11px; display:flex; align-items:center; justify-content:center;
+  background:var(--bg-3); border:1.5px solid var(--line); color:var(--ink-2); font-size:16px;
+  transition:all .14s ease; cursor:pointer;
+}
+.icon-btn:hover{background:var(--brand-soft); border-color:var(--brand-3); color:var(--brand); transform:translateY(-1px);}
+.icon-btn.wa{background:rgba(37,211,102,.15); border-color:rgba(37,211,102,.35); color:#0b7a4a;}
+.icon-btn.wa:hover{background:var(--wa); border-color:var(--wa); color:#fff;}
+
+/* Feedback cards */
+.feedback-list{display:flex; flex-direction:column; gap:12px;}
+.feedback-card{
+  background:var(--bg-3); border:1px solid var(--line-2);
+  border-radius:14px; padding:14px; transition:all .16s ease;
+}
+.feedback-card:hover{background:var(--bg-2); box-shadow:var(--shadow-sm);}
+.feedback-head{display:flex; align-items:center; gap:10px; margin-bottom:8px;}
+.feedback-avatar{
+  width:36px; height:36px; border-radius:50%; flex:none;
+  display:flex; align-items:center; justify-content:center; font-size:18px;
+  background:var(--brand-soft);
+}
+.feedback-info{flex:1; min-width:0;}
+.feedback-name{font-weight:800; font-size:.84rem; letter-spacing:-.01em;}
+.feedback-pet{font-size:.72rem; color:var(--ink-3); font-weight:600;}
+.feedback-stars{font-size:.82rem; letter-spacing:1px; color:var(--honey); flex:none;}
+.feedback-text{font-size:.82rem; color:var(--ink-2); line-height:1.5; font-weight:500; font-style:italic;}
+.feedback-text::before{content:"“"; color:var(--ink-3); margin-right:2px; font-size:1.1em;}
+.feedback-text::after{content:"”"; color:var(--ink-3); margin-left:2px; font-size:1.1em;}
+.feedback-time{font-size:.68rem; color:var(--ink-3); font-weight:700; margin-top:6px; text-transform:uppercase; letter-spacing:.04em;}
+
+/* Timeline */
+.timeline{display:flex; flex-direction:column; position:relative; padding-left:4px;}
+.tl-item{display:flex; gap:14px; padding:12px 0; position:relative;}
+.tl-item:not(:last-child)::before{
+  content:""; position:absolute; left:18px; top:44px; bottom:-4px;
+  width:2px; background:var(--line); z-index:0;
+}
+.tl-icon{
+  width:36px; height:36px; border-radius:11px; flex:none;
+  display:flex; align-items:center; justify-content:center; font-size:16px;
+  background:var(--bg-3); border:1.5px solid var(--line);
+  position:relative; z-index:1;
+}
+.tl-icon.alerta{background:var(--honey-soft); border-color:var(--honey);}
+.tl-icon.compra{background:var(--brand-soft); border-color:var(--brand-3);}
+.tl-icon.feedback{background:var(--honey-soft); border-color:var(--amber);}
+.tl-icon.suscripcion{background:var(--mint-soft); border-color:var(--mint);}
+.tl-body{flex:1; min-width:0; padding-top:2px;}
+.tl-text{font-size:.84rem; font-weight:600; color:var(--ink); line-height:1.45;}
+.tl-time{font-size:.7rem; color:var(--ink-3); font-weight:700; margin-top:4px; text-transform:uppercase; letter-spacing:.04em;}
+
+/* NPS */
+.nps-hero{
+  background:linear-gradient(135deg,var(--brand-wash),var(--honey-wash));
+  border:1px solid var(--line-2); border-radius:18px;
+  padding:22px; text-align:center; margin-bottom:18px;
+}
+.nps-score{
+  font-family:"Outfit",sans-serif; font-size:3.4rem; font-weight:900;
+  letter-spacing:-.05em; line-height:1;
+  background:linear-gradient(135deg,var(--brand),var(--honey));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.nps-label{font-size:.82rem; font-weight:800; color:var(--brand); margin-top:6px; text-transform:uppercase; letter-spacing:.06em;}
+.nps-sub{font-size:.74rem; color:var(--ink-3); margin-top:4px; font-weight:600;}
+.nps-bars{display:flex; flex-direction:column; gap:10px;}
+.nps-bar{display:flex; align-items:center; gap:10px; font-size:.78rem; font-weight:700;}
+.nps-bar .lbl{width:88px; color:var(--ink-3);}
+.nps-bar .track{flex:1; height:10px; background:var(--bg-3); border-radius:6px; overflow:hidden;}
+.nps-bar .track i{display:block; height:100%; border-radius:6px; transition:width .4s ease;}
+.nps-bar.prom .track i{background:linear-gradient(90deg,var(--brand),var(--brand-2));}
+.nps-bar.pas .track i{background:linear-gradient(90deg,var(--honey),var(--honey-2));}
+.nps-bar.det .track i{background:linear-gradient(90deg,var(--coral),var(--honey));}
+.nps-bar .pct{width:42px; text-align:right; color:var(--ink); font-family:"Outfit",sans-serif; font-weight:900;}
+
+/* Campaña card */
+.campaign-card{
+  background:linear-gradient(135deg,var(--honey-wash),var(--brand-wash));
+  border:1.5px solid var(--honey); border-radius:16px; padding:16px;
+  display:flex; gap:14px; align-items:center; margin-bottom:12px;
+}
+.campaign-icon{
+  width:44px; height:44px; border-radius:12px; flex:none;
+  background:linear-gradient(135deg,var(--honey),var(--amber));
+  color:#3f2a00; display:flex; align-items:center; justify-content:center;
+  font-size:22px; box-shadow:var(--shadow-honey);
+}
+.campaign-body{flex:1;}
+.campaign-title{font-family:"Outfit",sans-serif; font-weight:800; font-size:.9rem;}
+.campaign-desc{font-size:.74rem; color:var(--ink-2); font-weight:500; margin-top:2px;}
+.campaign-metric{font-family:"Outfit",sans-serif; font-weight:900; font-size:1.4rem; color:var(--brand); letter-spacing:-.03em;}
+
+/* ============================================================
+   BOTTOM NAV
+   ============================================================ */
+.bottom-nav{
+  display:none; position:fixed; left:0; right:0; bottom:0; z-index:35;
+  background:rgba(253,252,243,.95); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border-top:1.5px solid var(--line);
+  padding-bottom:var(--safe-b); padding-top:6px;
+  grid-template-columns:repeat(5,1fr);
+  box-shadow:0 -8px 24px rgba(26,36,22,.06);
+}
+.bottom-nav button{padding:8px 4px 10px; color:var(--ink-3); display:flex; flex-direction:column; align-items:center; gap:4px; font-size:.66rem; font-weight:800; letter-spacing:.02em; transition:color .14s ease;}
+.bottom-nav button svg{width:24px; height:24px; transition:transform .14s ease;}
+.bottom-nav button.on{color:var(--brand);}
+.bottom-nav button.on svg{transform:scale(1.1);}
+.bottom-nav button:nth-child(1).on svg{color:var(--brand);}
+.bottom-nav button:nth-child(2).on svg{color:var(--mint);}
+.bottom-nav button:nth-child(3).on svg{color:var(--honey);}
+.bottom-nav button:nth-child(4).on svg{color:var(--sky);}
+.bottom-nav button:nth-child(5).on svg{color:var(--brand);}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1100px){
+  .g4{grid-template-columns:repeat(2,1fr);}
+  .g3{grid-template-columns:1fr 1fr;}
+  .g2{grid-template-columns:1fr;}
+  .prod-grid{grid-template-columns:repeat(2,1fr);}
+  .racionador-wrap,.pos-wrap,.quick-wrap{grid-template-columns:1fr;}
+  .summary-card,.quick-side{position:static;}
+  .kanban{grid-template-columns:repeat(2,1fr);}
+  .pets-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media (max-width:780px){
+  .shell{grid-template-columns:1fr; grid-template-rows:auto 1fr;}
+  .menu-btn{display:flex;}
+  .topbar{grid-column:1; padding:0 14px; padding-top:var(--safe-t); gap:10px;}
+  .space-pill{display:none;}
+  .shift-pill{font-size:.72rem; padding:5px 11px;}
+  .shift-pill::before{display:none;}
+  .brand-sub{display:none;}
+  .brand-name{font-size:.95rem;}
+  .brand-mark{width:36px; height:36px; font-size:18px;}
+
+  .sidebar{position:fixed; left:0; top:calc(64px + var(--safe-t)); bottom:0; width:280px; z-index:40; transform:translateX(-100%); transition:transform .28s cubic-bezier(.2,.9,.3,1); padding:18px 0 40px 22px; box-shadow:var(--shadow-lg);}
+  .sidebar.open{transform:translateX(0);}
+  .drawer-overlay.on{display:block;}
+
+  main{padding:20px 16px calc(90px + var(--safe-b)); grid-column:1; grid-row:2;}
+  .view-head h1{font-size:1.4rem;}
+  .view-head .sub{font-size:.8rem;}
+
+  .g4{grid-template-columns:1fr 1fr; gap:12px;}
+  .card,.kpi{padding:15px; border-radius:18px;}
+  .kpi .value{font-size:1.55rem;}
+  .kpi-icon{width:36px; height:36px; border-radius:11px; font-size:18px;}
+  .kpi .label{font-size:.68rem;}
+
+  .prod-grid{grid-template-columns:1fr 1fr; gap:12px;}
+  .prod-swatch{height:90px;}
+  .prod-emoji{font-size:40px;}
+  .prod-body{padding:13px;}
+  .prod-price{font-size:1.1rem;}
+
+  .pos-grid{grid-template-columns:1fr 1fr;}
+  .kanban{grid-template-columns:1fr;}
+  .kcol{margin-bottom:10px; padding:12px;}
+  .pets-grid{grid-template-columns:1fr;}
+
+  .vitrina{padding:24px; border-radius:18px;}
+  .vitrina h2{font-size:1.45rem;}
+  .vitrina-grid{grid-template-columns:1fr; gap:12px;}
+  .vitem{padding:16px;}
+
+  .big-seg{grid-template-columns:repeat(5,1fr); gap:6px;}
+  .big-seg button{padding:10px 2px; font-size:.8rem; min-height:50px; border-radius:12px;}
+  .big-seg.thick button{font-size:.74rem;}
+  .big-seg.species-grid{grid-template-columns:repeat(4,1fr);}
+  .big-seg.species-grid .emoji{font-size:22px;}
+  .price-display .amt{font-size:2.4rem;}
+  .price-display{padding:22px 18px;}
+  .bowl-grams{font-size:2.4rem;}
+  .bowl-emoji{font-size:46px;}
+
+  .bottom-nav{display:grid;}
+  .seg button{font-size:.8rem; padding:10px 12px; min-height:44px;}
+  .seg.especies button{padding:10px 14px; font-size:.82rem;}
+  .weight-input input{width:120px; font-size:1.2rem;}
+
+  table.data{min-width:520px;}
+  .toolbar input[type=search]{font-size:16px;}
+  input, select {font-size:16px;}
+
+  .share-row{grid-template-columns:1fr 1fr;}
+  .two-col-note{flex-direction:column;}
+  .note-card{min-width:0;}
+  .view-head{margin-bottom:18px;}
+  .section-title{margin:24px 0 12px;}
+  .grid{gap:14px;}
+  .opt-block{margin-bottom:22px;}
+  .summary-card{padding:18px; border-radius:20px;}
+  .total-row .amt{font-size:1.75rem;}
+
+  .recompra-row{flex-wrap:wrap; gap:10px;}
+  .recompra-actions{width:100%; justify-content:flex-end;}
+  .recompra-days{min-width:64px; font-size:.92rem; padding:6px 10px;}
+  .nps-score{font-size:2.6rem;}
+}
+@media (max-width:460px){
+  .g4{grid-template-columns:1fr;}
+  .prod-grid{grid-template-columns:1fr;}
+  .big-seg{grid-template-columns:repeat(3,1fr);}
+  .big-seg.species-grid{grid-template-columns:repeat(3,1fr);}
+  .share-row{grid-template-columns:1fr;}
+  .pos-grid{grid-template-columns:1fr;}
+  .kpi .value{font-size:1.4rem;}
+  .recompra-days{font-size:.82rem; min-width:56px;}
+}
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <header class="topbar">
+    <button class="menu-btn" onclick="toggleDrawer()" aria-label="Abrir menú">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <div class="brand">
+      <div class="brand-mark">🐾</div>
+      <div class="brand-text">
+        <span class="brand-name">MisMascotas</span>
+        <span class="brand-sub">ecosistema elisekai</span>
+      </div>
+    </div>
+    <div class="space-pill"><span class="dot"></span> Sucursal Providencia</div>
+    <div class="shift-pill">Turno: <b>&nbsp;Andrés Monjes</b></div>
+  </header>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="nav-group-label">General</div>
+    <nav class="modules">
+      <button class="nav-item active" data-view="inicio">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5M6 10v9h12v-9"/></svg>
+        Inicio
+      </button>
+      <button class="nav-item" data-view="catalogo">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg>
+        Catálogo
+      </button>
+      <button class="nav-item" data-view="racionador">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3"/></svg>
+        Racionador
+      </button>
+      <button class="nav-item" data-view="cotizador">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.5 5.5 18 2l4 4-3.5 3.5M6 21H2v-4l11.5-11.5"/></svg>
+        Cotizador rápido
+      </button>
+      <button class="nav-item" data-view="caja">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3.5" y="6" width="17" height="13" rx="2"/><path d="M3.5 10.5h17M7 15h3"/></svg>
+        Punto de venta
+      </button>
+      <button class="nav-item" data-view="postventa">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/><path d="M9 12l2 2 4-4"/></svg>
+        Post-venta <span class="badge">6</span>
+      </button>
+      <button class="nav-item" data-view="entregas">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        Entregas <span class="badge">4</span>
+      </button>
+    </nav>
+
+    <div class="nav-group-label">Operación</div>
+    <nav class="modules">
+      <button class="nav-item" data-view="servicios">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 4L8 16l-4 4 4-4L20 4zM14 4l6 6"/></svg>
+        Peluquería y vet <span class="badge">2</span>
+      </button>
+      <button class="nav-item" data-view="mascotas">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="7" cy="9" r="2.5"/><circle cx="17" cy="9" r="2.5"/><circle cx="5" cy="16" r="2.2"/><circle cx="19" cy="16" r="2.2"/><ellipse cx="12" cy="14" rx="3.5" ry="4"/></svg>
+        Mascotas y clientes
+      </button>
+      <button class="nav-item" data-view="inventario">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 8.5 12 4l8 4.5V19a.8.8 0 0 1-.8.8H4.8A.8.8 0 0 1 4 19V8.5Z"/><path d="M4 8.5 12 13l8-4.5M12 13v6.8"/></svg>
+        Inventario
+      </button>
+      <button class="nav-item" data-view="proveedores">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><circle cx="17" cy="9.5" r="2.6"/><path d="M3 19c0-3 2.4-5 5-5s5 2 5 5M13 19c.3-2.2 1.9-4 4-4s3.9 1.6 4 4"/></svg>
+        Proveedores
+      </button>
+      <button class="nav-item" data-view="margenes">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3.5v17M8 6.8h4.6a2.6 2.6 0 0 1 0 5.2H9.4a2.6 2.6 0 0 0 0 5.2H16"/></svg>
+        Márgenes y precios
+      </button>
+      <button class="nav-item" data-view="vitrina-view">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3.5" y="4.5" width="17" height="12" rx="1.5"/><path d="M8.5 20h7M12 16.5V20"/></svg>
+        Vitrina
+      </button>
+      <button class="nav-item" data-view="reportes">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4.5 19.5v-6M11 19.5V8M17.5 19.5v-10"/></svg>
+        Reportes
+      </button>
+    </nav>
+
+    <div class="nav-group-label">Local</div>
+    <nav class="modules">
+      <button class="nav-item" data-view="ajustes">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 13.5a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V19.5a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.55 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.55-1H4.5a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.55-1 1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.7 1.7 0 0 0 1.87.34H10a1.7 1.7 0 0 0 1-1.55V4.5a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.55 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87V10a1.7 1.7 0 0 0 1.55 1h.1a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.55 1Z"/></svg>
+        Local y personal
+      </button>
+    </nav>
+  </aside>
+
+  <div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
+
+  <main id="main">
+    <!-- ===== INICIO ===== -->
+    <section class="view active" id="view-inicio">
+      <div class="view-head">
+        <div>
+          <h1>¡Buenas tardes, Andrés! 🌿</h1>
+          <p class="sub">Martes 22 de septiembre · Sucursal Providencia</p>
+        </div>
+        <button class="btn honey" onclick="go('caja')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+          Nueva venta
+        </button>
+      </div>
+
+      <div class="grid g4">
+        <div class="kpi" style="--kpi-color:#4d7c0f; --kpi-color-2:#65a30d;">
+          <div class="kpi-icon">💰</div>
+          <div class="label">Ventas de hoy</div>
+          <div class="value">$428.900</div>
+          <div class="delta up">↑ 22% vs. ayer</div>
+        </div>
+        <div class="kpi" style="--kpi-color:#10b981; --kpi-color-2:#34d399;">
+          <div class="kpi-icon">📦</div>
+          <div class="label">Entregas del día</div>
+          <div class="value">8</div>
+          <div class="delta neutral">3 en reparto</div>
+        </div>
+        <div class="kpi" style="--kpi-color:#eab308; --kpi-color-2:#facc15;">
+          <div class="kpi-icon">🔔</div>
+          <div class="label">Recompras hoy</div>
+          <div class="value">6</div>
+          <div class="delta up">2 urgentes</div>
+        </div>
+        <div class="kpi" style="--kpi-color:#14b8a6; --kpi-color-2:#2dd4bf;">
+          <div class="kpi-icon">🐶</div>
+          <div class="label">Mascotas activas</div>
+          <div class="value">247</div>
+          <div class="delta up">↑ 12 este mes</div>
+        </div>
+      </div>
+
+      <div class="grid g2" style="margin-top:24px;">
+        <div class="card">
+          <h3 style="font-size:1rem; margin-bottom:10px;">🚨 Alertas de stock</h3>
+          <div id="home-alerts"></div>
+        </div>
+        <div class="card">
+          <h3 style="font-size:1rem; margin-bottom:10px;">📅 Próximas entregas</h3>
+          <div id="home-orders"></div>
+        </div>
+      </div>
+
+      <div class="section-title">Accesos rápidos</div>
+      <div class="grid g4">
+        <button class="card hoverable" style="text-align:left; cursor:pointer;" onclick="go('postventa')">
+          <div class="kpi-icon" style="margin-bottom:12px; width:38px; height:38px; border-radius:12px; background:linear-gradient(135deg,#eab308,#facc15); color:#3f2a00;">🎯</div>
+          <h3 style="font-size:.95rem;">Post-venta</h3>
+          <p style="font-size:.78rem; color:var(--ink-3); margin-top:6px; font-weight:500;">6 clientes por recompra</p>
+        </button>
+        <button class="card hoverable" style="text-align:left; cursor:pointer;" onclick="go('racionador')">
+          <div class="kpi-icon" style="margin-bottom:12px; width:38px; height:38px; border-radius:12px; background:linear-gradient(135deg,#4d7c0f,#65a30d);">🍽️</div>
+          <h3 style="font-size:.95rem;">Calcular ración</h3>
+          <p style="font-size:.78rem; color:var(--ink-3); margin-top:6px; font-weight:500;">Cuánto come y cuánto dura el saco</p>
+        </button>
+        <button class="card hoverable" style="text-align:left; cursor:pointer;" onclick="go('mascotas')">
+          <div class="kpi-icon" style="margin-bottom:12px; width:38px; height:38px; border-radius:12px; background:linear-gradient(135deg,#10b981,#34d399);">🐕</div>
+          <h3 style="font-size:.95rem;">Mascotas registradas</h3>
+          <p style="font-size:.78rem; color:var(--ink-3); margin-top:6px; font-weight:500;">247 peluditos en el sistema</p>
+        </button>
+        <button class="card hoverable" style="text-align:left; cursor:pointer;" onclick="go('entregas')">
+          <div class="kpi-icon" style="margin-bottom:12px; width:38px; height:38px; border-radius:12px; background:linear-gradient(135deg,#14b8a6,#2dd4bf);">🚚</div>
+          <h3 style="font-size:.95rem;">Ver entregas</h3>
+          <p style="font-size:.78rem; color:var(--ink-3); margin-top:6px; font-weight:500;">Suscripciones y despachos</p>
+        </button>
+      </div>
+    </section>
+
+    <!-- ===== CATÁLOGO ===== -->
+    <section class="view" id="view-catalogo">
+      <div class="view-head">
+        <div><h1>Catálogo</h1><p class="sub">158 productos activos · 12 con promoción</p></div>
+        <button class="btn ghost">+ Nuevo producto</button>
+      </div>
+      <div class="toolbar">
+        <input type="search" placeholder="Buscar por nombre, marca o código…" oninput="renderCatalog(this.value)">
+        <div class="chip-select" id="catalog-filters"></div>
+      </div>
+      <div class="prod-grid" id="catalog-grid"></div>
+    </section>
+
+    <!-- ===== RACIONADOR ===== -->
+    <section class="view" id="view-racionador">
+      <div class="view-head">
+        <div><h1>Racionador inteligente</h1><p class="sub">Calculá exactamente cuánta comida necesita tu mascota por día</p></div>
+      </div>
+      <div class="racionador-wrap">
+        <div>
+          <div class="opt-block">
+            <div class="opt-label">¿Qué mascota es? <span class="hint">elegí la especie</span></div>
+            <div class="seg especies" id="racion-especie"></div>
+          </div>
+          <div class="opt-block" id="racion-size-block">
+            <div class="opt-label">Tamaño <span class="hint">según raza adulta</span></div>
+            <div class="seg" id="racion-size"></div>
+          </div>
+          <div class="opt-block">
+            <div class="opt-label">Etapa de vida</div>
+            <div class="seg" id="racion-etapa"></div>
+          </div>
+          <div class="opt-block">
+            <div class="opt-label">Peso actual <span class="hint">en kilogramos</span></div>
+            <div class="weight-input">
+              <input type="number" id="racion-peso" value="12" min="0.5" max="90" step="0.5" oninput="renderRacionador()">
+              <span>kg</span>
+            </div>
+          </div>
+          <div class="opt-block">
+            <div class="opt-label">Nivel de actividad</div>
+            <div class="seg" id="racion-actividad"></div>
+          </div>
+          <div class="opt-block">
+            <div class="opt-label">Necesidades especiales <span class="hint">podés elegir varias</span></div>
+            <div class="needs-grid" id="racion-needs"></div>
+          </div>
+          <div class="opt-block">
+            <div class="opt-label">Línea de alimento</div>
+            <div class="seg" id="racion-linea"></div>
+          </div>
+          <div class="opt-block">
+            <div class="opt-label">Formato del envase</div>
+            <div class="seg" id="racion-formato"></div>
+          </div>
+        </div>
+
+        <div class="summary-card">
+          <h3>Recomendación</h3>
+          <div id="racion-desc"></div>
+          <div class="bowl-card">
+            <div class="bowl-emoji" id="racion-bowl-emoji">🐶</div>
+            <div class="bowl-label">Ración diaria</div>
+            <div class="bowl-grams" id="racion-grams">—</div>
+            <div class="bowl-sub" id="racion-bowl-sub">—</div>
+          </div>
+          <div class="info-stack" id="racion-info"></div>
+          <div class="total-row">
+            <div class="lbl">Precio del envase</div>
+            <div class="amt" id="racion-total">$0</div>
+          </div>
+          <div class="est-badge" id="racion-plazo"></div>
+          <button class="btn honey full" onclick="addRacionToCart()">🛒 Agregar a la venta</button>
+          <button class="btn mint full" onclick="subscribeRacion()">🔁 Suscribir entrega automática</button>
+          <button class="btn wa full" onclick="shareRacionWhatsApp()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 3.9A10 10 0 0 0 4 17.4L3 21l3.7-1a10 10 0 0 0 15-15.1Z"/></svg>
+            Enviar por WhatsApp
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== COTIZADOR ===== -->
+    <section class="view" id="view-cotizador">
+      <div class="view-head">
+        <div><h1>Cotizador rápido ⚡</h1><p class="sub">Para estar frente al cliente y cotizar en el momento</p></div>
+      </div>
+      <div class="quick-wrap">
+        <div>
+          <div class="quick-card">
+            <h3>Cliente</h3>
+            <div style="display:flex; gap:10px;">
+              <input type="text" id="q-cliente" placeholder="Nombre o teléfono (opcional)" style="flex:1; padding:13px 16px; border-radius:14px; border:2px solid var(--line); background:var(--bg-3); color:var(--ink); font-size:.9rem; min-height:50px; font-weight:600;">
+              <button class="btn ghost" onclick="alert('Historial: 5 compras previas · 890 puntos KYU acumulados · 2 mascotas registradas.')">Ver</button>
+            </div>
+          </div>
+          <div class="quick-card">
+            <h3>Mascota</h3>
+            <div class="big-seg species-grid" id="q-especie"></div>
+          </div>
+          <div class="quick-card">
+            <h3>Peso y edad</h3>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+              <label style="font-size:.72rem; color:var(--ink-3); display:flex; flex-direction:column; gap:8px; font-weight:800; text-transform:uppercase; letter-spacing:.06em;">Peso (kg)<input type="number" id="q-peso" value="12" step="0.5" oninput="quickCalc()" style="font-family:'Outfit',sans-serif; font-size:1.9rem; font-weight:800; padding:14px; border-radius:14px; border:2px solid var(--line); background:var(--bg-3); color:var(--ink); text-align:center; min-height:70px;"></label>
+              <label style="font-size:.72rem; color:var(--ink-3); display:flex; flex-direction:column; gap:8px; font-weight:800; text-transform:uppercase; letter-spacing:.06em;">Edad (años)<input type="number" id="q-edad" value="4" min="0" step="1" oninput="quickCalc()" style="font-family:'Outfit',sans-serif; font-size:1.9rem; font-weight:800; padding:14px; border-radius:14px; border:2px solid var(--line); background:var(--bg-3); color:var(--ink); text-align:center; min-height:70px;"></label>
+            </div>
+          </div>
+          <div class="quick-card">
+            <h3>Línea de alimento</h3>
+            <div class="big-seg" id="q-linea" style="grid-template-columns:repeat(2,1fr);"></div>
+          </div>
+          <div class="quick-card">
+            <h3>Formato</h3>
+            <div class="big-seg thick" id="q-formato"></div>
+          </div>
+        </div>
+
+        <div class="quick-side">
+          <div class="price-display">
+            <div class="lbl">Precio cotizado</div>
+            <div class="amt" id="q-total">$0</div>
+            <div class="sub" id="q-detalle">—</div>
+          </div>
+          <div class="info-stack" id="q-info"></div>
+          <div class="share-row">
+            <button class="btn wa" onclick="shareQuickWhatsApp()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 3.9A10 10 0 0 0 4 17.4L3 21l3.7-1a10 10 0 0 0 15-15.1Z"/></svg>
+              WhatsApp
+            </button>
+            <button class="btn ghost" onclick="copyQuote()">Copiar</button>
+            <button class="btn sky" onclick="addQuickToCart()">A la venta</button>
+            <button class="btn mint" onclick="alert('Cotización guardada. Recordatorio en 3 días.')">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PUNTO DE VENTA ===== -->
+    <section class="view" id="view-caja">
+      <div class="view-head">
+        <div><h1>Punto de venta</h1><p class="sub">Venta #2104 · Vendedor: Andrés M.</p></div>
+      </div>
+      <div class="pos-wrap">
+        <div>
+          <div class="toolbar"><input type="search" placeholder="Buscar producto o escanear código…"></div>
+          <div class="pos-grid" id="pos-grid"></div>
+        </div>
+        <div class="card">
+          <h3 style="font-size:1rem; margin-bottom:8px;">🛒 Carrito</h3>
+          <div class="cart" id="pos-cart"></div>
+          <div style="margin-top:16px; display:flex; flex-direction:column; gap:10px; font-size:.86rem; font-weight:600;">
+            <div style="display:flex; justify-content:space-between;"><span style="color:var(--ink-3);">Subtotal</span><b id="pos-sub">$0</b></div>
+            <div style="display:flex; justify-content:space-between; color:var(--mint);"><span>Descuento promoción</span><b id="pos-desc">–$0</b></div>
+            <div style="display:flex; justify-content:space-between; color:var(--ink-3);"><span>Puntos KYU del cliente</span><b style="color:var(--brand);">890 pts</b></div>
+            <div style="display:flex; justify-content:space-between; font-size:1.15rem; padding-top:12px; border-top:2px dashed var(--line); align-items:baseline;">
+              <span style="color:var(--ink-3); font-weight:800; text-transform:uppercase; letter-spacing:.06em; font-size:.8rem;">Total</span>
+              <b id="pos-total" style="font-family:'Outfit',sans-serif; font-weight:900; letter-spacing:-.03em; font-size:1.5rem;">$0</b>
+            </div>
+          </div>
+          <div class="pay-methods">
+            <button class="chip on">Débito</button>
+            <button class="chip">Crédito</button>
+            <button class="chip">Efectivo</button>
+            <button class="chip">Transferencia</button>
+          </div>
+          <button class="btn mint full" style="margin-top:16px;" onclick="checkout()">✓ Generar ticket y cobrar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== POST-VENTA ===== -->
+    <section class="view" id="view-postventa">
+      <div class="view-head">
+        <div>
+          <h1>Post-venta 🎯</h1>
+          <p class="sub">Seguimiento, recordatorios y fidelización de clientes de alimento</p>
+        </div>
+        <button class="btn honey" onclick="alert('Campaña creada: se enviará recordatorio automático a los 6 clientes con recompra próxima.')">
+          + Nueva campaña
+        </button>
+      </div>
+
+      <!-- KPIs -->
+      <div class="grid g4">
+        <div class="kpi" style="--kpi-color:#4d7c0f; --kpi-color-2:#65a30d;">
+          <div class="kpi-icon">👥</div>
+          <div class="label">Clientes activos</div>
+          <div class="value">184</div>
+          <div class="delta up">↑ 12 este mes</div>
+        </div>
+        <div class="kpi" style="--kpi-color:#eab308; --kpi-color-2:#facc15;">
+          <div class="kpi-icon">🔔</div>
+          <div class="label">Alertas enviadas hoy</div>
+          <div class="value">12</div>
+          <div class="delta up">3 respondidas</div>
+        </div>
+        <div class="kpi" style="--kpi-color:#10b981; --kpi-color-2:#34d399;">
+          <div class="kpi-icon">🔁</div>
+          <div class="label">Tasa de recompra</div>
+          <div class="value">68%</div>
+          <div class="delta up">↑ 4% vs. mes pasado</div>
+        </div>
+        <div class="kpi" style="--kpi-color:#14b8a6; --kpi-color-2:#2dd4bf;">
+          <div class="kpi-icon">⭐</div>
+          <div class="label">NPS promedio</div>
+          <div class="value">9.2</div>
+          <div class="delta up">Excelente</div>
+        </div>
+      </div>
+
+      <!-- Campaña activa + Próximas recompras -->
+      <div class="grid g2" style="margin-top:24px;">
+        <div class="card">
+          <div class="campaign-card">
+            <div class="campaign-icon">📣</div>
+            <div class="campaign-body">
+              <div class="campaign-title">Campaña activa · "Tu peludo tiene hambre"</div>
+              <div class="campaign-desc">Recordatorio automático por WhatsApp 3 días antes de que se acabe el alimento</div>
+            </div>
+            <div class="campaign-metric">86%</div>
+          </div>
+          <h3 style="font-size:1rem; margin:14px 0 10px;">🔔 Clientes con recompra próxima</h3>
+          <div class="recompra-list" id="recompra-list"></div>
+        </div>
+
+        <div class="card">
+          <h3 style="font-size:1rem; margin-bottom:12px;">⭐ Feedback reciente</h3>
+          <div class="feedback-list" id="feedback-list"></div>
+        </div>
+      </div>
+
+      <!-- Suscripciones -->
+      <div class="section-title">🔁 Suscripciones activas</div>
+      <div class="table-scroll">
+        <table class="data">
+          <thead>
+            <tr>
+              <th>Cliente</th>
+              <th>Mascota</th>
+              <th>Producto</th>
+              <th>Frecuencia</th>
+              <th>Próximo envío</th>
+              <th>Estado</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="suscripciones-body"></tbody>
+        </table>
+      </div>
+
+      <!-- Timeline + NPS -->
+      <div class="grid g2" style="margin-top:24px;">
+        <div class="card">
+          <h3 style="font-size:1rem; margin-bottom:12px;">📋 Actividad de seguimiento</h3>
+          <div class="timeline" id="timeline"></div>
+        </div>
+        <div class="card">
+          <h3 style="font-size:1rem; margin-bottom:12px;">📊 Net Promoter Score</h3>
+          <div class="nps-hero">
+            <div class="nps-score">9.2</div>
+            <div class="nps-label">Excelente</div>
+            <div class="nps-sub">Basado en 47 respuestas este mes</div>
+          </div>
+          <div class="nps-bars">
+            <div class="nps-bar prom">
+              <span class="lbl">Promotores</span>
+              <div class="track"><i style="width:74%"></i></div>
+              <span class="pct">74%</span>
+            </div>
+            <div class="nps-bar pas">
+              <span class="lbl">Pasivos</span>
+              <div class="track"><i style="width:18%"></i></div>
+              <span class="pct">18%</span>
+            </div>
+            <div class="nps-bar det">
+              <span class="lbl">Detractores</span>
+              <div class="track"><i style="width:8%"></i></div>
+              <span class="pct">8%</span>
+            </div>
+          </div>
+          <div class="note-card" style="margin-top:16px; background:var(--brand-wash); border:none; padding:14px;">
+            <b>💡 Insight:</b> El 89% de los clientes que reciben recordatorio por WhatsApp recompra alimento de perro dentro de la semana.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ENTREGAS ===== -->
+    <section class="view" id="view-entregas">
+      <div class="view-head">
+        <div><h1>Entregas y suscripciones</h1><p class="sub">Despachos agendados y planes de alimento recurrente</p></div>
+        <button class="btn">+ Nueva entrega</button>
+      </div>
+      <div class="kanban" id="kanban"></div>
+    </section>
+
+    <!-- ===== PELUQUERÍA Y VET ===== -->
+    <section class="view" id="view-servicios">
+      <div class="view-head">
+        <div><h1>Peluquería y veterinaria</h1><p class="sub">Baños, cortes, vacunas y consultas</p></div>
+        <button class="btn">+ Agendar servicio</button>
+      </div>
+      <div class="grid g3" style="margin-bottom:22px;">
+        <div class="kpi" style="--kpi-color:#eab308; --kpi-color-2:#facc15;">
+          <div class="kpi-icon">🛁</div>
+          <div class="label">Baño y corte</div>
+          <div class="value" style="font-size:1.35rem;">Desde $18.000</div>
+          <div class="delta neutral">según tamaño</div>
+        </div>
+        <div class="kpi" style="--kpi-color:#4d7c0f; --kpi-color-2:#65a30d;">
+          <div class="kpi-icon">💉</div>
+          <div class="label">Vacunación</div>
+          <div class="value" style="font-size:1.35rem;">Desde $12.000</div>
+          <div class="delta neutral">óctuple + antirrábica</div>
+        </div>
+        <div class="kpi" style="--kpi-color:#10b981; --kpi-color-2:#34d399;">
+          <div class="kpi-icon">🩺</div>
+          <div class="label">Consulta vet</div>
+          <div class="value" style="font-size:1.35rem;">$15.000</div>
+          <div class="delta neutral">incluye receta</div>
+        </div>
+      </div>
+      <h3 style="font-size:1rem; margin-bottom:12px;">Servicios agendados</h3>
+      <div class="table-scroll">
+        <table class="data">
+          <thead><tr><th>Mascota</th><th>Servicio</th><th>Dueño</th><th>Fecha</th><th>Estado</th></tr></thead>
+          <tbody id="servicios-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== MASCOTAS ===== -->
+    <section class="view" id="view-mascotas">
+      <div class="view-head">
+        <div><h1>Mascotas y clientes</h1><p class="sub">247 mascotas registradas · perfil completo con historial</p></div>
+        <button class="btn">+ Registrar mascota</button>
+      </div>
+      <div class="toolbar">
+        <input type="search" placeholder="Buscar por mascota o dueño…">
+        <div class="chip-select">
+          <button class="chip on">Todos</button>
+          <button class="chip">🐶 Perros</button>
+          <button class="chip">🐱 Gatos</button>
+          <button class="chip">Otros</button>
+        </div>
+      </div>
+      <div class="pets-grid" id="pets-grid"></div>
+    </section>
+
+    <!-- ===== INVENTARIO ===== -->
+    <section class="view" id="view-inventario">
+      <div class="view-head">
+        <div><h1>Inventario</h1><p class="sub">Alimentos, accesorios, higiene e insumos</p></div>
+      </div>
+      <div class="table-scroll">
+        <table class="data">
+          <thead><tr><th>Producto</th><th>Categoría</th><th>Stock</th><th>Mínimo</th><th>Ubicación</th><th></th></tr></thead>
+          <tbody id="despensa-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== PROVEEDORES ===== -->
+    <section class="view" id="view-proveedores">
+      <div class="view-head">
+        <div><h1>Proveedores</h1><p class="sub">7 distribuidoras activas</p></div>
+        <button class="btn ghost">+ Nuevo proveedor</button>
+      </div>
+      <div class="table-scroll">
+        <table class="data">
+          <thead><tr><th>Proveedor</th><th>Rubro</th><th>Contacto</th><th>Última compra</th><th>Condiciones</th></tr></thead>
+          <tbody id="proveedores-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== MÁRGENES ===== -->
+    <section class="view" id="view-margenes">
+      <div class="view-head">
+        <div><h1>Márgenes y precios</h1><p class="sub">Base para el cálculo del racionador y el catálogo</p></div>
+      </div>
+      <div class="grid g2">
+        <div class="card">
+          <h3 style="font-size:1rem; margin-bottom:14px;">💎 Precio por línea de alimento (CLP/kg)</h3>
+          <div class="table-scroll">
+            <table class="data">
+              <thead><tr><th>Línea</th><th>Costo mayorista</th><th>Margen</th><th>Precio venta</th></tr></thead>
+              <tbody id="margenes-body"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card">
+          <h3 style="font-size:1rem; margin-bottom:14px;">🧮 Simulador rápido</h3>
+          <div style="display:flex; flex-direction:column; gap:14px; font-size:.86rem;">
+            <label style="font-weight:700;">Costo de compra (CLP)
+              <input type="number" id="sim-costo" value="42000" style="width:100%; margin-top:6px; padding:12px 14px; border-radius:12px; border:1.5px solid var(--line); background:var(--bg-3); color:var(--ink); font-weight:700; font-family:'Outfit',sans-serif; font-size:1rem;">
+            </label>
+            <label style="font-weight:700;">Margen objetivo (%)
+              <input type="number" id="sim-margen" value="38" style="width:100%; margin-top:6px; padding:12px 14px; border-radius:12px; border:1.5px solid var(--line); background:var(--bg-3); color:var(--ink); font-weight:700; font-family:'Outfit',sans-serif; font-size:1rem;">
+            </label>
+            <button class="btn full" onclick="simMargen()">Calcular precio sugerido</button>
+            <div class="est-badge" id="sim-result" style="font-size:.9rem; text-align:center; font-weight:800; color:var(--brand);">Precio sugerido: —</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== VITRINA ===== -->
+    <section class="view" id="view-vitrina-view">
+      <div class="view-head">
+        <div><h1>Vitrina de precios</h1><p class="sub">Vista para mostrar en mostrador o enviar por WhatsApp</p></div>
+        <button class="btn ghost" onclick="alert('Enlace público copiado al portapapeles + QR generado.')">Exportar / QR</button>
+      </div>
+      <div class="vitrina">
+        <h2>🐾 MisMascotas</h2>
+        <div class="sub">Alimentos, accesorios y servicios — lista de precios septiembre 2026</div>
+        <div class="vitrina-grid" id="vitrina-grid"></div>
+      </div>
+    </section>
+
+    <!-- ===== REPORTES ===== -->
+    <section class="view" id="view-reportes">
+      <div class="view-head">
+        <div><h1>Reportes</h1><p class="sub">Últimos 7 días</p></div>
+      </div>
+      <div class="grid g2">
+        <div class="card">
+          <h3 style="font-size:1rem; margin-bottom:10px;">📊 Ventas por día</h3>
+          <div class="bar-chart" id="report-bars"></div>
+        </div>
+        <div class="card">
+          <h3 style="font-size:1rem; margin-bottom:14px;">🏆 Productos más vendidos</h3>
+          <table class="data"><tbody id="report-top"></tbody></table>
+        </div>
+      </div>
+      <div class="two-col-note">
+        <div class="note-card"><b>Ventas por categoría:</b> Alimento perro 46% · Alimento gato 28% · Accesorios 14% · Higiene 8% · Otras mascotas 4%</div>
+        <div class="note-card"><b>Retención post-venta:</b> 68% recompra mensual · 34 suscripciones activas · NPS 9.2 · 89% responde recordatorios</div>
+      </div>
+    </section>
+
+    <!-- ===== AJUSTES ===== -->
+    <section class="view" id="view-ajustes">
+      <div class="view-head">
+        <div><h1>Local y personal</h1><p class="sub">Configuración del local, equipo y políticas</p></div>
+      </div>
+      <div class="grid g2">
+        <div class="card">
+          <h3 style="font-size:1rem; margin-bottom:14px;">🌿 Datos del local</h3>
+          <table class="data">
+            <tr><td>Nombre</td><td>MisMascotas Providencia</td></tr>
+            <tr><td>Dirección</td><td>Av. Providencia 1847, local 3</td></tr>
+            <tr><td>Formas de pago</td><td>Débito, crédito, efectivo, transferencia</td></tr>
+            <tr><td>Despacho</td><td>Gratis en Providencia · 24h hábiles</td></tr>
+            <tr><td>Suscripciones</td><td>Delivery automático cada 20/30/45 días</td></tr>
+            <tr><td>Recordatorio post-venta</td><td>WhatsApp 3 días antes del fin del alimento</td></tr>
+            <tr><td>Impuesto</td><td>IVA 19% incluido</td></tr>
+          </table>
+        </div>
+        <div class="card">
+          <h3 style="font-size:1rem; margin-bottom:14px;">👥 Equipo</h3>
+          <table class="data" id="staff-body"></table>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<nav class="bottom-nav" id="bottomNav">
+  <button data-view="inicio" class="on" onclick="go('inicio')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5M6 10v9h12v-9"/></svg>
+    Inicio
+  </button>
+  <button data-view="postventa" onclick="go('postventa')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/><path d="M9 12l2 2 4-4"/></svg>
+    Post-venta
+  </button>
+  <button data-view="racionador" onclick="go('racionador')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3"/></svg>
+    Ración
+  </button>
+  <button data-view="caja" onclick="go('caja')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10.5h18M7 15h3"/></svg>
+    Venta
+  </button>
+  <button onclick="toggleDrawer()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    Más
+  </button>
+</nav>
+
+<script>
+/* ============================================================
+   UTILS
+   ============================================================ */
+const CLP = n => "$" + Math.round(n).toLocaleString("es-CL");
+
+/* ============================================================
+   NAVEGACIÓN
+   ============================================================ */
+function go(view){
+  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+  const el = document.getElementById("view-"+view);
+  if(el) el.classList.add("active");
+  document.querySelectorAll(".nav-item").forEach(n=>n.classList.toggle("active", n.dataset.view===view));
+  document.querySelectorAll(".bottom-nav button").forEach(n=>n.classList.toggle("on", n.dataset.view===view));
+  document.getElementById("main").scrollTo(0,0);
+  if(window.innerWidth <= 780) closeDrawer();
+}
+document.querySelectorAll(".nav-item").forEach(n=>n.addEventListener("click", ()=>go(n.dataset.view)));
+
+function toggleDrawer(){
+  const sb = document.getElementById("sidebar");
+  const ov = document.getElementById("drawerOverlay");
+  sb.classList.toggle("open");
+  ov.classList.toggle("on", sb.classList.contains("open"));
+}
+function closeDrawer(){
+  document.getElementById("sidebar").classList.remove("open");
+  document.getElementById("drawerOverlay").classList.remove("on");
+}
+
+/* ============================================================
+   DATOS
+   ============================================================ */
+const PALETTE = ["#4d7c0f","#eab308","#10b981","#14b8a6","#84cc16","#f59e0b"];
+const products = [
+  {code:"AP-AD-15", nombre:"Alimento Perro Adulto Raza Mediana", tipo:"Alimento perro", detalle:"Saco 15 kg · Cordero y arroz", precio:54990, stock:24, promo:false, emoji:"🐶"},
+  {code:"AP-CP-3", nombre:"Alimento Cachorro Raza Pequeña", tipo:"Alimento perro", detalle:"Bolsa 3 kg · Pollo y arroz", precio:18990, stock:18, promo:true, emoji:"🐶"},
+  {code:"AP-SP-15", nombre:"Alimento Perro Super Premium", tipo:"Alimento perro", detalle:"Saco 15 kg · Salmón sin grano", precio:89990, stock:8, promo:false, emoji:"🐕"},
+  {code:"AP-SR-10", nombre:"Alimento Perro Senior", tipo:"Alimento perro", detalle:"Saco 10 kg · Cordero y arroz integral", precio:64990, stock:11, promo:false, emoji:"🐕"},
+  {code:"AG-AD-75", nombre:"Alimento Gato Adulto Esterilizado", tipo:"Alimento gato", detalle:"Bolsa 7.5 kg · Pollo y pavo", precio:42990, stock:15, promo:false, emoji:"🐱"},
+  {code:"AG-CP-15", nombre:"Alimento Gatito 1-12 meses", tipo:"Alimento gato", detalle:"Bolsa 1.5 kg · Pavo", precio:14990, stock:12, promo:false, emoji:"🐈"},
+  {code:"AG-HU-10", nombre:"Alimento Gato Húmedo Pack x12", tipo:"Alimento gato", detalle:"Sobres 85 g · Salmón", precio:15990, stock:20, promo:true, emoji:"🐈"},
+  {code:"AC-PR-2", nombre:"Alimento Conejo Premium", tipo:"Otras mascotas", detalle:"Bolsa 2 kg · Heno y verduras", precio:9990, stock:20, promo:false, emoji:"🐰"},
+  {code:"AC-GA-10", nombre:"Alimento Gallina Postura", tipo:"Otras mascotas", detalle:"Saco 10 kg · Grano molido", precio:12990, stock:30, promo:false, emoji:"🐔"},
+  {code:"AA-CO-1", nombre:"Alimento Cotorra Mixtura", tipo:"Otras mascotas", detalle:"Bolsa 1 kg · Semillas premium", precio:7990, stock:16, promo:false, emoji:"🦜"},
+  {code:"AR-HA-500", nombre:"Alimento Hámster", tipo:"Otras mascotas", detalle:"500 g · Mezcla completa", precio:4990, stock:14, promo:false, emoji:"🐹"},
+  {code:"AC-CA-M", nombre:"Collar Antipulgas 8 meses", tipo:"Accesorios", detalle:"Ajustable · Perros medianos", precio:8990, stock:22, promo:false, emoji:"🦮"},
+  {code:"AC-CO-R", nombre:"Correa Retráctil 5 m", tipo:"Accesorios", detalle:"Hasta 25 kg · Mango ergonómico", precio:13990, stock:11, promo:false, emoji:"🦮"},
+  {code:"AC-JU-K", nombre:"Juguete Kong Clásico Talla M", tipo:"Accesorios", detalle:"Caucho natural resistente", precio:12990, stock:9, promo:true, emoji:"🎾"},
+  {code:"AC-BE-A", nombre:"Bebedero Automático 3 L", tipo:"Accesorios", detalle:"Recirculante · Silencioso", precio:15990, stock:7, promo:false, emoji:"💧"},
+  {code:"AC-CM-M", nombre:"Cama Acolchada Talla M", tipo:"Accesorios", detalle:"Antideslizante · Lavable", precio:24990, stock:6, promo:false, emoji:"🛏️"},
+  {code:"AR-AG-10", nombre:"Arena Sanitaria Aglomerante", tipo:"Higiene", detalle:"Saco 10 kg · Control de olores", precio:11990, stock:35, promo:false, emoji:"🐱"},
+  {code:"HI-SH-500", nombre:"Shampoo Hipoalergénico 500 ml", tipo:"Higiene", detalle:"Avena y aloe vera", precio:8990, stock:18, promo:false, emoji:"🧴"},
+  {code:"HI-CE-D", nombre:"Cepillo Deslanador", tipo:"Higiene", detalle:"Cerdas de acero inoxidable", precio:6990, stock:14, promo:false, emoji:"🪮"},
+  {code:"AC-RA-G", nombre:"Rascador para Gatos 60 cm", tipo:"Accesorios", detalle:"Sisal natural + plataforma", precio:44990, stock:4, promo:false, emoji:"🐈"},
+  {code:"AC-PE-20", nombre:"Pecera 20 L con filtro", tipo:"Accesorios", detalle:"Kit completo con LED", precio:59990, stock:3, promo:false, emoji:"🐠"},
+];
+
+const catFilters = ["Todos","Alimento perro","Alimento gato","Otras mascotas","Accesorios","Higiene"];
+let activeFilter = "Todos";
+
+function renderCatalogFilters(){
+  document.getElementById("catalog-filters").innerHTML = catFilters.map(f =>
+    `<button class="chip ${f===activeFilter?'on':''}" onclick="setFilter('${f}')">${f}</button>`).join("");
+}
+function setFilter(f){ activeFilter=f; renderCatalogFilters(); renderCatalog(document.querySelector('.toolbar input')?.value||""); }
+
+function renderCatalog(q=""){
+  q = q.toLowerCase();
+  const list = products.filter(p =>
+    (activeFilter==="Todos"||p.tipo===activeFilter) &&
+    (p.nombre.toLowerCase().includes(q) || p.code.toLowerCase().includes(q)));
+  document.getElementById("catalog-grid").innerHTML = list.map((p,i)=>`
+    <div class="prod-card">
+      <div class="prod-swatch" style="background:linear-gradient(135deg, ${PALETTE[i%PALETTE.length]}55, ${PALETTE[(i+2)%PALETTE.length]}33);">
+        <div class="prod-emoji">${p.emoji}</div>
+        ${p.promo?'<div class="prod-promo">Promo</div>':''}
+        <span class="code">${p.code}</span>
+      </div>
+      <div class="prod-body">
+        <h3>${p.nombre}</h3>
+        <div class="prod-specs">${p.detalle}</div>
+        <div class="prod-foot">
+          <div class="prod-price">${CLP(p.precio)}</div>
+          <div class="prod-stock ${p.stock<5?'low':''}">${p.stock<5?'⚠ ':''}${p.stock} un.</div>
+        </div>
+      </div>
+    </div>`).join("");
+}
+
+/* ============================================================
+   HOME
+   ============================================================ */
+const alerts = [
+  {t:"Alimento Perro Super Premium 15 kg — quedan 3", s:"Mínimo recomendado: 8", warn:false},
+  {t:"Rascador para Gatos — quedan 4 unidades", s:"Mínimo recomendado: 6", warn:true},
+  {t:"Pecera 20 L con filtro — quedan 3 unidades", s:"Mínimo recomendado: 5", warn:false},
+];
+document.getElementById("home-alerts").innerHTML = alerts.map(a=>`
+  <div class="alert-row ${a.warn?'warn':''}"><span class="alert-dot"></span><div class="t">${a.t}<small>${a.s}</small></div></div>`).join("");
+
+const orders = [
+  {id:"ENT-2087", cliente:"M. Riquelme", estado:"reparto"},
+  {id:"ENT-2088", cliente:"F. Contreras", estado:"preparando"},
+  {id:"ENT-2089", cliente:"J. Bravo", estado:"pendiente"},
+];
+document.getElementById("home-orders").innerHTML = orders.map(o=>`
+  <div class="mini-order"><span>${o.id} — ${o.cliente}</span><span class="tag ${o.estado}">${labelEstado(o.estado)}</span></div>`).join("");
+
+function labelEstado(e){
+  return {pendiente:"Pendiente",preparando:"Preparando",reparto:"En reparto",entregado:"Entregado",pausada:"Pausada",activa:"Activa"}[e] || e;
+}
+
+/* ============================================================
+   POST-VENTA
+   ============================================================ */
+const proximasRecompras = [
+  {mascota:"Simba", emoji:"🐈", dueno:"L. Fuentes", dias:1, ultimaCompra:"Hace 29 días", producto:"Alimento Gato Adulto 7.5 kg", bg:"#fef9c3", ring:"#facc15"},
+  {mascota:"Rex", emoji:"🐕", dueno:"J. Bravo", dias:2, ultimaCompra:"Hace 28 días", producto:"Super Premium Salmón 15 kg", bg:"#ecfccb", ring:"#a3e635"},
+  {mascota:"Firulais", emoji:"🐶", dueno:"F. Contreras", dias:3, ultimaCompra:"Hace 27 días", producto:"Alimento Perro Adulto 15 kg", bg:"#ccfbf1", ring:"#2dd4bf"},
+  {mascota:"Michi", emoji:"🐱", dueno:"M. Riquelme", dias:5, ultimaCompra:"Hace 25 días", producto:"Alimento Gato Esterilizado 7.5 kg", bg:"#d1fae5", ring:"#34d399"},
+  {mascota:"Nube", emoji:"🐩", dueno:"C. Silva", dias:6, ultimaCompra:"Hace 24 días", producto:"Super Premium Senior 7.5 kg", bg:"#fef3c7", ring:"#fbbf24"},
+  {mascota:"Bunny", emoji:"🐰", dueno:"A. Peña", dias:7, ultimaCompra:"Hace 23 días", producto:"Alimento Conejo Premium 2 kg", bg:"#ecfccb", ring:"#84cc16"},
+];
+
+function renderRecompras(){
+  document.getElementById("recompra-list").innerHTML = proximasRecompras.map(r=>{
+    const cls = r.dias <= 2 ? "urgent" : r.dias <= 4 ? "warn" : "";
+    return `
+    <div class="recompra-row">
+      <div class="recompra-pet" style="--pet-bg:${r.bg}; --pet-ring:${r.ring};">${r.emoji}</div>
+      <div class="recompra-info">
+        <div class="recompra-title">${r.mascota} <span class="recompra-owner">· ${r.dueno}</span></div>
+        <div class="recompra-detail">${r.producto} · ${r.ultimaCompra}</div>
+      </div>
+      <div class="recompra-days ${cls}">${r.dias}<span>días</span></div>
+      <div class="recompra-actions">
+        <button class="icon-btn wa" title="Enviar recordatorio WhatsApp" onclick="recordarWhatsApp('${r.mascota}','${r.dueno}','${r.producto}',${r.dias})">💬</button>
+        <button class="icon-btn" title="Marcar como recordado" onclick="this.textContent='✓'; this.style.background='var(--mint-soft)'; this.style.borderColor='var(--mint)';">🔔</button>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+function recordarWhatsApp(mascota, dueno, producto, dias){
+  const msg = `*MisMascotas* 🐾\n\nHola ${dueno}, te escribimos para recordarte que a *${mascota}* le quedan aproximadamente ${dias} días de alimento.\n\nSu producto habitual es: ${producto}\n\n¿Querés que te lo preparemos para retiro o despacho? 🚚\n\nRespondé este mensaje y lo coordinamos.`;
+  window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, "_blank");
+}
+
+const feedbackReciente = [
+  {cliente:"F. Contreras", mascota:"Firulais", emoji:"🐶", rating:5, comentario:"El alimento le encantó, ya no deja nada en el plato. Y el recordatorio por WhatsApp me salvó la semana.", fecha:"Hace 2 horas"},
+  {cliente:"M. Riquelme", mascota:"Michi", emoji:"🐱", rating:5, comentario:"Me ayudaron a calcular la ración exacta y el delivery llegó al toque.", fecha:"Ayer"},
+  {cliente:"C. Silva", mascota:"Nube", emoji:"🐩", rating:4, comentario:"Buena calidad. El precio subió un poco pero vale la pena.", fecha:"Ayer"},
+  {cliente:"V. Arce", mascota:"Kiwi", emoji:"🦜", rating:5, comentario:"Excelente variedad para aves, encontré todo lo que buscaba.", fecha:"Hace 2 días"},
+  {cliente:"D. Muñoz", mascota:"Burbuja", emoji:"🐠", rating:4, comentario:"Buena atención, aunque faltarían más marcas de peces.", fecha:"Hace 3 días"},
+];
+
+function renderFeedback(){
+  document.getElementById("feedback-list").innerHTML = feedbackReciente.map(f=>`
+    <div class="feedback-card">
+      <div class="feedback-head">
+        <div class="feedback-avatar">${f.emoji}</div>
+        <div class="feedback-info">
+          <div class="feedback-name">${f.cliente}</div>
+          <div class="feedback-pet">dueño de ${f.mascota}</div>
+        </div>
+        <div class="feedback-stars">${"★".repeat(f.rating)}${"☆".repeat(5-f.rating)}</div>
+      </div>
+      <div class="feedback-text">${f.comentario}</div>
+      <div class="feedback-time">${f.fecha}</div>
+    </div>`).join("");
+}
+
+const suscripciones = [
+  {cliente:"J. Bravo", mascota:"Rex", emoji:"🐕", producto:"Super Premium Salmón 15 kg", frecuencia:"Cada 30 días", proximo:"25 sep", estado:"activa"},
+  {cliente:"L. Fuentes", mascota:"Simba", emoji:"🐈", producto:"Alimento Gato Adulto 7.5 kg", frecuencia:"Cada 25 días", proximo:"23 sep", estado:"activa"},
+  {cliente:"F. Contreras", mascota:"Firulais", emoji:"🐶", producto:"Perro Adulto Raza Mediana 15 kg", frecuencia:"Cada 28 días", proximo:"19 oct", estado:"activa"},
+  {cliente:"M. Riquelme", mascota:"Michi", emoji:"🐱", producto:"Gato Esterilizado 7.5 kg", frecuencia:"Cada 30 días", proximo:"22 oct", estado:"activa"},
+  {cliente:"A. Peña", mascota:"Bunny", emoji:"🐰", producto:"Conejo Premium 2 kg", frecuencia:"Cada 45 días", proximo:"—", estado:"pausada"},
+  {cliente:"R. Soto", mascota:"Chispa", emoji:"🐔", producto:"Alimento Gallina Postura 10 kg", frecuencia:"Cada 60 días", proximo:"30 sep", estado:"activa"},
+];
+
+function renderSuscripciones(){
+  document.getElementById("suscripciones-body").innerHTML = suscripciones.map(s=>`
+    <tr>
+      <td><b>${s.cliente}</b></td>
+      <td>${s.emoji} ${s.mascota}</td>
+      <td>${s.producto}</td>
+      <td>${s.frecuencia}</td>
+      <td>${s.proximo}</td>
+      <td><span class="tag ${s.estado}">${s.estado}</span></td>
+      <td>
+        <button class="icon-btn wa" title="WhatsApp" onclick="alert('Abriendo WhatsApp con ${s.cliente}...')">💬</button>
+      </td>
+    </tr>`).join("");
+}
+
+const timelineData = [
+  {tipo:"alerta", icon:"🔔", texto:"Recordatorio enviado a <b>F. Contreras</b> (Firulais) por WhatsApp", hora:"Hace 15 min"},
+  {tipo:"compra", icon:"🛒", texto:"<b>L. Fuentes</b> compró Alimento Gato Adulto 7.5 kg — +42 puntos KYU", hora:"Hace 1 hora"},
+  {tipo:"feedback", icon:"⭐", texto:"Nueva reseña 5★ de <b>M. Riquelme</b> (Michi)", hora:"Hace 3 horas"},
+  {tipo:"alerta", icon:"🔔", texto:"Recordatorio enviado a <b>J. Bravo</b> (Rex) — quedan 2 días de alimento", hora:"Hace 5 horas"},
+  {tipo:"suscripcion", icon:"🔁", texto:"Nueva suscripción activada: <b>C. Silva</b> (Nube) cada 30 días", hora:"Ayer 18:40"},
+  {tipo:"compra", icon:"🛒", texto:"<b>V. Arce</b> compró Arena Sanitaria 10 kg — +18 puntos KYU", hora:"Ayer 16:20"},
+  {tipo:"feedback", icon:"⭐", texto:"Nueva reseña 4★ de <b>C. Silva</b> (Nube)", hora:"Ayer 12:10"},
+  {tipo:"alerta", icon:"🔔", texto:"Recordatorio enviado a <b>M. Riquelme</b> (Michi) — quedan 5 días", hora:"Ayer 10:00"},
+];
+
+function renderTimeline(){
+  document.getElementById("timeline").innerHTML = timelineData.map(t=>`
+    <div class="tl-item">
+      <div class="tl-icon ${t.tipo}">${t.icon}</div>
+      <div class="tl-body">
+        <div class="tl-text">${t.texto}</div>
+        <div class="tl-time">${t.hora}</div>
+      </div>
+    </div>`).join("");
+}
+
+/* ============================================================
+   RACIONADOR
+   ============================================================ */
+const SPECIES = [
+  {id:"perro", nombre:"Perro", emoji:"🐶", hasSize:true},
+  {id:"gato", nombre:"Gato", emoji:"🐱", hasSize:true},
+  {id:"conejo", nombre:"Conejo", emoji:"🐰", hasSize:false},
+  {id:"gallina", nombre:"Gallina", emoji:"🐔", hasSize:false},
+  {id:"ave", nombre:"Ave", emoji:"🦜", hasSize:false},
+  {id:"roedor", nombre:"Roedor", emoji:"🐹", hasSize:false},
+  {id:"pez", nombre:"Pez", emoji:"🐠", hasSize:false},
+];
+const SIZES = ["Toy","Pequeño","Mediano","Grande","Gigante"];
+const ETAPAS = ["Cachorro","Adulto","Senior"];
+const ACTIVIDADES = [
+  {id:"bajo", nombre:"Bajo", factor:0.9},
+  {id:"normal", nombre:"Normal", factor:1.0},
+  {id:"alto", nombre:"Alto", factor:1.2},
+  {id:"muyalto", nombre:"Muy alto", factor:1.4},
+];
+const NEEDS = [
+  {id:"ninguna", nombre:"Ninguna"},
+  {id:"esterilizado", nombre:"Esterilizado", factor:0.85},
+  {id:"controlPeso", nombre:"Control de peso", factor:0.80},
+  {id:"pielSensible", nombre:"Piel sensible", factor:1.0},
+  {id:"digestion", nombre:"Digestión sensible", factor:0.95},
+];
+const FOOD_LINES = [
+  {id:"superpremium", nombre:"Super Premium", precioKg:6500, kcal:4000},
+  {id:"premium", nombre:"Premium", precioKg:4500, kcal:3700},
+  {id:"estandar", nombre:"Estándar", precioKg:3200, kcal:3300},
+  {id:"grainfree", nombre:"Grain Free", precioKg:7800, kcal:3900},
+];
+const FORMATOS = [
+  {kg:1, descuento:0},
+  {kg:3, descuento:0.03},
+  {kg:7.5, descuento:0.05},
+  {kg:15, descuento:0.08},
+  {kg:20, descuento:0.10},
+];
+
+const racion = {species:0, size:2, etapa:1, peso:12, actividad:1, needs:["ninguna"], linea:1, formato:3};
+
+function renderRacionador(){
+  document.getElementById("racion-especie").innerHTML = SPECIES.map((s,i)=>
+    `<button class="${racion.species===i?'on':''}" onclick="setRacion('species',${i})"><span class="emoji">${s.emoji}</span> ${s.nombre}</button>`).join("");
+
+  const sizeBlock = document.getElementById("racion-size-block");
+  if(SPECIES[racion.species].hasSize){
+    sizeBlock.style.display="block";
+    document.getElementById("racion-size").innerHTML = SIZES.map((s,i)=>
+      `<button class="${racion.size===i?'on':''}" onclick="setRacion('size',${i})">${s}</button>`).join("");
+  } else { sizeBlock.style.display="none"; }
+
+  document.getElementById("racion-etapa").innerHTML = ETAPAS.map((e,i)=>
+    `<button class="${racion.etapa===i?'on':''}" onclick="setRacion('etapa',${i})">${e}</button>`).join("");
+  document.getElementById("racion-actividad").innerHTML = ACTIVIDADES.map((a,i)=>
+    `<button class="${racion.actividad===i?'on':''}" onclick="setRacion('actividad',${i})">${a.nombre}</button>`).join("");
+  document.getElementById("racion-needs").innerHTML = NEEDS.map(n=>
+    `<button class="need-chip ${racion.needs.includes(n.id)?'on':''}" onclick="toggleNeed('${n.id}')">${n.nombre}</button>`).join("");
+  document.getElementById("racion-linea").innerHTML = FOOD_LINES.map((l,i)=>
+    `<button class="${racion.linea===i?'on':''}" onclick="setRacion('linea',${i})">${l.nombre}</button>`).join("");
+  document.getElementById("racion-formato").innerHTML = FORMATOS.map((f,i)=>
+    `<button class="${racion.formato===i?'on':''}" onclick="setRacion('formato',${i})">${f.kg} kg</button>`).join("");
+
+  calcRacion();
+}
+function setRacion(key, val){ racion[key] = val; renderRacionador(); }
+function toggleNeed(id){
+  if(id==="ninguna"){ racion.needs = ["ninguna"]; }
+  else {
+    racion.needs = racion.needs.filter(n=>n!=="ninguna");
+    if(racion.needs.includes(id)) racion.needs = racion.needs.filter(n=>n!==id);
+    else racion.needs.push(id);
+    if(racion.needs.length===0) racion.needs = ["ninguna"];
+  }
+  renderRacionador();
+}
+
+function calcularRacion(speciesId, sizeIdx, etapaIdx, peso, actividadId, needs, lineaId){
+  const etapaFactor = {Cachorro:2.5, Adulto:1.6, Senior:1.2}[ETAPAS[etapaIdx]];
+  const actFactor = ACTIVIDADES[actividadId].factor;
+  let sizeFactor = 1.0;
+  if(speciesId==="perro") sizeFactor = [1.15, 1.10, 1.0, 0.92, 0.85][sizeIdx];
+  else if(speciesId==="gato") sizeFactor = 1.10;
+  let specialFactor = 1.0;
+  needs.forEach(nid=>{
+    const n = NEEDS.find(x=>x.id===nid);
+    if(n && n.factor) specialFactor *= n.factor;
+  });
+  if(!needs.includes("esterilizado") && (speciesId==="perro"||speciesId==="gato")) specialFactor *= 1.05;
+  const kcalPerKg = FOOD_LINES[lineaId].kcal;
+  let mer;
+  if(speciesId==="perro" || speciesId==="gato"){
+    const rer = 70 * Math.pow(peso, 0.75);
+    mer = rer * etapaFactor * actFactor * sizeFactor * specialFactor;
+  } else {
+    const baseKcalPerKg = {conejo:60, gallina:80, ave:100, roedor:70, pez:5}[speciesId] || 60;
+    mer = peso * baseKcalPerKg * (etapaFactor/1.6) * actFactor * specialFactor;
+  }
+  return Math.max(5, Math.round((mer / kcalPerKg) * 1000));
+}
+
+function calcRacion(){
+  const sp = SPECIES[racion.species];
+  const peso = Math.max(0.1, +document.getElementById("racion-peso").value || 12);
+  const dailyGrams = calcularRacion(sp.id, racion.size, racion.etapa, peso, racion.actividad, racion.needs, racion.linea);
+  const formato = FORMATOS[racion.formato];
+  const diasDuracion = Math.floor((formato.kg * 1000) / dailyGrams);
+  const linea = FOOD_LINES[racion.linea];
+  const precioBase = linea.precioKg * formato.kg;
+  const precioFinal = precioBase * (1 - formato.descuento);
+  const costoDiario = precioFinal / diasDuracion;
+
+  document.getElementById("racion-desc").textContent = `${sp.nombre} ${sp.hasSize?'· '+SIZES[racion.size]:''} · ${ETAPAS[racion.etapa]} · ${peso} kg · ${linea.nombre}`;
+  document.getElementById("racion-bowl-emoji").textContent = sp.emoji;
+  document.getElementById("racion-grams").textContent = dailyGrams + " g";
+  document.getElementById("racion-bowl-sub").textContent = `por día · ${linea.nombre}`;
+
+  document.getElementById("racion-info").innerHTML = [
+    ["Envase", `${formato.kg} kg`],
+    ["Duración", `~${diasDuracion} días`],
+    ["Ración diaria", `${dailyGrams} g`],
+    ["Costo diario", CLP(costoDiario)]
+  ].map(r=>`<div class="info-row"><span class="n">${r[0]}</span><span class="v">${r[1]}</span></div>`).join("");
+
+  document.getElementById("racion-total").textContent = CLP(precioFinal);
+  document.getElementById("racion-plazo").textContent = diasDuracion > 0
+    ? `🔁 Con ${formato.kg} kg tenés para ${diasDuracion} días. Suscripción sugerida cada ${diasDuracion} días.`
+    : "Ajustá los parámetros para ver la recomendación.";
+
+  window._lastRacion = {dailyGrams, formato, diasDuracion, precioFinal, costoDiario, sp, peso, linea};
+}
+
+function addRacionToCart(){
+  const r = window._lastRacion;
+  cart.push({nombre: `${r.linea.nombre} ${r.formato.kg} kg · para ${r.sp.nombre} ${r.peso} kg`, precio: Math.round(r.precioFinal)});
+  renderCart(); go('caja');
+}
+function subscribeRacion(){
+  const r = window._lastRacion;
+  alert(`✓ Suscripción activada\n\n${r.linea.nombre} ${r.formato.kg} kg\nEntrega automática cada ${r.diasDuracion} días\n\nSe enviará aviso por WhatsApp 24 h antes de cada despacho.`);
+}
+function shareRacionWhatsApp(){
+  const r = window._lastRacion;
+  const msg = `*MisMascotas* 🌿\n\nRecomendación para tu ${r.sp.nombre.toLowerCase()} de ${r.peso} kg:\n\n• Ración diaria: *${r.dailyGrams} g*\n• Alimento: ${r.linea.nombre}\n• Envase: ${r.formato.kg} kg (dura ~${r.diasDuracion} días)\n\n*Precio: ${CLP(r.precioFinal)}*\nCosto diario: ${CLP(r.costoDiario)}\n\nDespacho gratis en Providencia 🐾`;
+  window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, "_blank");
+}
+
+/* ============================================================
+   COTIZADOR
+   ============================================================ */
+const q = { species:0, linea:1, formato:2 };
+function renderQuick(){
+  document.getElementById("q-especie").innerHTML = SPECIES.slice(0,7).map((s,i)=>
+    `<button class="${q.species===i?'on':''}" onclick="q.species=${i};renderQuick();quickCalc();"><span class="emoji">${s.emoji}</span><span style="font-size:.7rem; margin-top:2px;">${s.nombre}</span></button>`).join("");
+  document.getElementById("q-linea").innerHTML = FOOD_LINES.map((l,i)=>
+    `<button class="${q.linea===i?'on':''}" onclick="q.linea=${i};renderQuick();quickCalc();">${l.nombre}</button>`).join("");
+  document.getElementById("q-formato").innerHTML = FORMATOS.map((f,i)=>
+    `<button class="${q.formato===i?'on':''}" onclick="q.formato=${i};renderQuick();quickCalc();">${f.kg} kg</button>`).join("");
+}
+function quickCalc(){
+  const peso = Math.max(0.1, +document.getElementById("q-peso").value || 12);
+  const edad = +document.getElementById("q-edad").value || 4;
+  const sp = SPECIES[q.species];
+  let etapaIdx = 1;
+  if(edad < 1) etapaIdx = 0;
+  else if(edad >= 8) etapaIdx = 2;
+  const dailyGrams = calcularRacion(sp.id, 2, etapaIdx, peso, 1, ["ninguna"], q.linea);
+  const formato = FORMATOS[q.formato];
+  const diasDuracion = Math.floor((formato.kg * 1000) / dailyGrams);
+  const linea = FOOD_LINES[q.linea];
+  const precioBase = linea.precioKg * formato.kg;
+  const precioFinal = precioBase * (1 - formato.descuento);
+  const costoDiario = precioFinal / diasDuracion;
+
+  document.getElementById("q-total").textContent = CLP(precioFinal);
+  document.getElementById("q-detalle").textContent = `${sp.nombre} ${peso} kg · ${linea.nombre} ${formato.kg} kg`;
+  document.getElementById("q-info").innerHTML = `
+    <div class="info-row"><span class="n">Ración diaria</span><span class="v">${dailyGrams} g</span></div>
+    <div class="info-row"><span class="n">Duración envase</span><span class="v">~${diasDuracion} días</span></div>
+    <div class="info-row"><span class="n">Costo diario</span><span class="v">${CLP(costoDiario)}</span></div>
+    <div class="info-row"><span class="n">Precio por kg</span><span class="v">${CLP(precioFinal/formato.kg)}</span></div>`;
+  window._lastQuick = {sp, peso, linea, formato, precioFinal, dailyGrams, diasDuracion};
+}
+function shareQuickWhatsApp(){
+  const r = window._lastQuick;
+  const cliente = document.getElementById("q-cliente").value.trim();
+  const msg = `*MisMascotas* 🌿\nHola${cliente?` ${cliente}`:''}, aquí va la cotización:\n\n• ${r.sp.nombre} · ${r.peso} kg\n• ${r.linea.nombre} · envase ${r.formato.kg} kg\n• Ración: ${r.dailyGrams} g/día (dura ~${r.diasDuracion} días)\n\n*Precio: ${CLP(r.precioFinal)}*\n\nDespacho gratis en Providencia 🐾`;
+  window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, "_blank");
+}
+function copyQuote(){
+  const r = window._lastQuick;
+  const txt = `Cotización MisMascotas: ${r.sp.nombre} ${r.peso} kg · ${r.linea.nombre} ${r.formato.kg} kg · ${CLP(r.precioFinal)}`;
+  navigator.clipboard?.writeText(txt).then(()=>alert("Cotización copiada al portapapeles.")).catch(()=>alert(txt));
+}
+function addQuickToCart(){
+  const r = window._lastQuick;
+  cart.push({nombre:`${r.linea.nombre} ${r.formato.kg} kg · ${r.sp.nombre}`, precio: Math.round(r.precioFinal)});
+  renderCart(); go('caja');
+}
+
+/* ============================================================
+   POS
+   ============================================================ */
+let cart = [
+  {nombre:"Alimento Perro Adulto Raza Mediana 15 kg", precio:54990},
+  {nombre:"Juguete Kong Clásico Talla M", precio:12990},
+];
+function renderPosGrid(){
+  document.getElementById("pos-grid").innerHTML = products.map(p=>`
+    <button class="pos-item" onclick='cart.push({nombre:"${p.nombre}",precio:${p.precio}}); renderCart();'>
+      <div class="nm">${p.emoji} ${p.nombre}</div><div class="pr">${CLP(p.precio)}</div>
+    </button>`).join("");
+}
+function renderCart(){
+  document.getElementById("pos-cart").innerHTML = cart.map((c,i)=>`
+    <div class="cart-row">
+      <span>${c.nombre}</span>
+      <span style="display:flex; gap:10px; align-items:center;">
+        <b>${CLP(c.precio)}</b>
+        <button class="rm" onclick="cart.splice(${i},1); renderCart();">✕</button>
+      </span>
+    </div>`).join("");
+  const sub = cart.reduce((s,c)=>s+c.precio,0);
+  const desc = cart.some(c=>c.nombre.includes("Super Premium"))? sub*0.08 : 5000;
+  const total = sub-desc;
+  document.getElementById("pos-sub").textContent = CLP(sub);
+  document.getElementById("pos-desc").textContent = "–"+CLP(desc);
+  document.getElementById("pos-total").textContent = CLP(total);
+}
+function checkout(){
+  alert("✓ Ticket #2104 generado.\nVenta cobrada por débito.\nSe acreditaron 428 puntos KYU al cliente.\n\nRecordatorio post-venta programado según duración del alimento.");
+  cart = []; renderCart();
+}
+
+/* ============================================================
+   ENTREGAS
+   ============================================================ */
+const entregas = [
+  {id:"ENT-2080", cliente:"C. Molina", detalle:"Alimento gato 7.5 kg", emoji:"🐱", estado:"pendiente", fecha:"Hoy 18:00"},
+  {id:"ENT-2081", cliente:"R. Soto", detalle:"Saco perro 15 kg + collar", emoji:"🐶", estado:"pendiente", fecha:"Hoy 19:30"},
+  {id:"ENT-2082", cliente:"F. Contreras", detalle:"Arena sanitaria 10 kg", emoji:"🐱", estado:"preparando", fecha:"Hoy 17:00"},
+  {id:"ENT-2083", cliente:"M. Riquelme", detalle:"Alimento cachorro 3 kg", emoji:"🐶", estado:"preparando", fecha:"Hoy 16:30"},
+  {id:"ENT-2084", cliente:"J. Bravo", detalle:"Alimento conejo + heno", emoji:"🐰", estado:"reparto", fecha:"En camino"},
+  {id:"ENT-2085", cliente:"A. Peña", detalle:"Alimento gallina 10 kg", emoji:"🐔", estado:"reparto", fecha:"En camino"},
+  {id:"ENT-2078", cliente:"L. Fuentes", detalle:"Suscripción mensual perro", emoji:"🐶", estado:"entregado", fecha:"Ayer 19:00"},
+  {id:"ENT-2079", cliente:"V. Arce", detalle:"Shampoo + cepillo", emoji:"🧴", estado:"entregado", fecha:"Ayer 15:30"},
+];
+const estadosEntrega = [["pendiente","Pendiente"],["preparando","Preparando"],["reparto","En reparto"],["entregado","Entregado"]];
+function renderKanban(){
+  document.getElementById("kanban").innerHTML = estadosEntrega.map(([key,label])=>`
+    <div class="kcol"><h3>${label} · ${entregas.filter(p=>p.estado===key).length}</h3>
+      ${entregas.filter(p=>p.estado===key).map(p=>`
+        <div class="kcard">
+          <div class="pet-emoji">${p.emoji}</div>
+          <div class="id">${p.id}</div>
+          <div class="meta">${p.cliente}</div>
+          <div class="meta">${p.detalle}</div>
+          <div class="fecha">${p.fecha}</div>
+        </div>`).join("")}
+    </div>`).join("");
+}
+
+/* ============================================================
+   SERVICIOS
+   ============================================================ */
+const servicios = [
+  {mascota:"Firulais", servicio:"Baño y corte", dueno:"F. Contreras", fecha:"Hoy 15:30", estado:"entregado"},
+  {mascota:"Michi", servicio:"Vacuna óctuple", dueno:"M. Riquelme", fecha:"Hoy 17:00", estado:"preparando"},
+  {mascota:"Rex", servicio:"Corte de uñas + baño", dueno:"J. Bravo", fecha:"Mañana 10:00", estado:"pendiente"},
+  {mascota:"Bunny", servicio:"Consulta vet", dueno:"A. Peña", fecha:"Vie 24 sep 11:00", estado:"pendiente"},
+];
+function renderServicios(){
+  document.getElementById("servicios-body").innerHTML = servicios.map(s=>`
+    <tr>
+      <td><b>${s.mascota}</b></td>
+      <td>${s.servicio}</td>
+      <td style="color:var(--ink-3);">${s.dueno}</td>
+      <td>${s.fecha}</td>
+      <td><span class="tag ${s.estado}">${labelEstado(s.estado)}</span></td>
+    </tr>`).join("");
+}
+
+/* ============================================================
+   MASCOTAS
+   ============================================================ */
+const mascotas = [
+  {nombre:"Firulais", especie:"Perro", raza:"Labrador", emoji:"🐶", dueno:"F. Contreras", edad:"4 años", proximo:"Vacuna en 2 meses", color:"#ecfccb", ring:"#a3e635"},
+  {nombre:"Michi", especie:"Gato", raza:"Siamés", emoji:"🐱", dueno:"M. Riquelme", edad:"2 años", proximo:"Control en 3 semanas", color:"#d1fae5", ring:"#34d399"},
+  {nombre:"Rex", especie:"Perro", raza:"Pastor Alemán", emoji:"🐕", dueno:"J. Bravo", edad:"6 años", proximo:"Baño agendado mañana", color:"#fef9c3", ring:"#facc15"},
+  {nombre:"Bunny", especie:"Conejo", raza:"Enano holandés", emoji:"🐰", dueno:"A. Peña", edad:"1 año", proximo:"Consulta vie 24 sep", color:"#ccfbf1", ring:"#2dd4bf"},
+  {nombre:"Simba", especie:"Gato", raza:"Mestizo naranja", emoji:"🐈", dueno:"L. Fuentes", edad:"3 años", proximo:"Esterilizado", color:"#fef3c7", ring:"#fbbf24"},
+  {nombre:"Kiwi", especie:"Ave", raza:"Cotorra argentina", emoji:"🦜", dueno:"V. Arce", edad:"5 años", proximo:"Sin novedades", color:"#ecfccb", ring:"#84cc16"},
+  {nombre:"Nube", especie:"Perro", raza:"Poodle toy", emoji:"🐩", dueno:"C. Silva", edad:"8 años", proximo:"Chequeo senior", color:"#fef3c7", ring:"#f59e0b"},
+  {nombre:"Chispa", especie:"Gallina", raza:"Plymouth Rock", emoji:"🐔", dueno:"R. Soto", edad:"2 años", proximo:"Sin novedades", color:"#fef9c3", ring:"#eab308"},
+  {nombre:"Burbuja", especie:"Pez", raza:"Betta splendens", emoji:"🐠", dueno:"D. Muñoz", edad:"1 año", proximo:"Cambio de agua 27 sep", color:"#ccfbf1", ring:"#14b8a6"},
+];
+function renderMascotas(){
+  document.getElementById("pets-grid").innerHTML = mascotas.map(m=>`
+    <div class="pet-card">
+      <div class="pet-head">
+        <div class="pet-avatar" style="--pet-bg:${m.color}; --pet-ring:${m.ring};">${m.emoji}</div>
+        <div class="pet-info">
+          <div class="pet-name">${m.nombre}</div>
+          <div class="pet-meta">${m.especie} · ${m.raza}</div>
+        </div>
+      </div>
+      <div class="pet-rows">
+        <div class="pet-row"><span class="k">Dueño</span><span class="v">${m.dueno}</span></div>
+        <div class="pet-row"><span class="k">Edad</span><span class="v">${m.edad}</span></div>
+        <div class="pet-row"><span class="k">Próximo</span><span class="v" style="color:var(--brand);">${m.proximo}</span></div>
+      </div>
+    </div>`).join("");
+}
+
+/* ============================================================
+   INVENTARIO
+   ============================================================ */
+const insumos = [
+  {n:"Alimento Perro Adulto 15 kg", cat:"Alimento perro", stock:24, min:12, ub:"Bodega A · estante 1"},
+  {n:"Alimento Perro Super Premium 15 kg", cat:"Alimento perro", stock:3, min:8, ub:"Bodega A · estante 2"},
+  {n:"Alimento Gato Esterilizado 7.5 kg", cat:"Alimento gato", stock:15, min:10, ub:"Bodega A · estante 3"},
+  {n:"Alimento Conejo Premium 2 kg", cat:"Otras mascotas", stock:20, min:8, ub:"Bodega B · estante 1"},
+  {n:"Arena Sanitaria 10 kg", cat:"Higiene", stock:35, min:15, ub:"Bodega B · estante 2"},
+  {n:"Collar Antipulgas", cat:"Accesorios", stock:22, min:12, ub:"Vitrina mostrador"},
+  {n:"Shampoo Hipoalergénico 500 ml", cat:"Higiene", stock:18, min:10, ub:"Bodega C"},
+  {n:"Juguete Kong Talla M", cat:"Accesorios", stock:9, min:6, ub:"Vitrina mostrador"},
+  {n:"Pecera 20 L con filtro", cat:"Accesorios", stock:3, min:5, ub:"Bodega C · piso"},
+  {n:"Rascador para Gatos 60 cm", cat:"Accesorios", stock:4, min:6, ub:"Bodega C · piso"},
+];
+function renderInventario(){
+  document.getElementById("despensa-body").innerHTML = insumos.map(i=>{
+    const pct = Math.min(100, Math.round(i.stock/(i.min*2)*100));
+    const low = i.stock<i.min;
+    return `<tr>
+      <td>${i.n}</td>
+      <td>${i.cat}</td>
+      <td><div style="display:flex; align-items:center; gap:10px;"><b style="font-family:'Outfit',sans-serif;">${i.stock}</b> <div class="stockbar ${low?'low':''}"><i style="width:${pct}%"></i></div></div></td>
+      <td>${i.min}</td><td>${i.ub}</td>
+      <td>${low?'<span class="tag reponer">Reponer</span>':''}</td>
+    </tr>`;
+  }).join("");
+}
+
+/* ============================================================
+   PROVEEDORES
+   ============================================================ */
+const proveedores = [
+  {n:"Distribuidora PetFood Chile", rubro:"Alimento perro/gato", contacto:"ventas@petfoodchile.cl", ult:"18 sep 2026", pref:"–8% sobre lista"},
+  {n:"AgroNutrición Animal", rubro:"Alimento otras mascotas", contacto:"pedidos@agronutricion.cl", ult:"15 sep 2026", pref:"Envío gratis desde 30 sacos"},
+  {n:"PetCare Import", rubro:"Accesorios importados", contacto:"comercial@petcareimport.cl", ult:"12 sep 2026", pref:"30 días de crédito"},
+  {n:"Higiene & Mascotas", rubro:"Shampoos y arenas", contacto:"contacto@higmascotas.cl", ult:"9 sep 2026", pref:"–5% en compras > $300.000"},
+  {n:"Juguetes del Sur", rubro:"Juguetes y camas", contacto:"ventas@juguetesdelsur.cl", ult:"5 sep 2026", pref:"Compra mínima $150.000"},
+  {n:"Acuario Central", rubro:"Peces y acuarios", contacto:"pedidos@acuariocentral.cl", ult:"28 ago 2026", pref:"Precio fijo peceras"},
+  {n:"Logística Peluda", rubro:"Despacho / última milla", contacto:"despacho@logisticapeluda.cl", ult:"20 sep 2026", pref:"Tarifa plana RM"},
+];
+function renderProveedores(){
+  document.getElementById("proveedores-body").innerHTML = proveedores.map(p=>
+    `<tr><td>${p.n}</td><td>${p.rubro}</td><td>${p.contacto}</td><td>${p.ult}</td><td>${p.pref}</td></tr>`).join("");
+}
+
+/* ============================================================
+   MÁRGENES
+   ============================================================ */
+function renderMargenes(){
+  document.getElementById("margenes-body").innerHTML = FOOD_LINES.map(l=>{
+    const costo = Math.round(l.precioKg * 0.72);
+    const margen = Math.round((l.precioKg - costo) / l.precioKg * 100);
+    return `<tr>
+      <td><b>${l.nombre}</b></td>
+      <td>${CLP(costo)} / kg</td>
+      <td>${margen}%</td>
+      <td><b style="color:var(--brand);">${CLP(l.precioKg)} / kg</b></td>
+    </tr>`;
+  }).join("");
+}
+function simMargen(){
+  const costo = +document.getElementById("sim-costo").value;
+  const margen = +document.getElementById("sim-margen").value;
+  const precio = costo / (1 - margen/100);
+  document.getElementById("sim-result").textContent = `💰 Precio sugerido: ${CLP(precio)}`;
+}
+
+/* ============================================================
+   VITRINA
+   ============================================================ */
+function renderVitrina(){
+  const destacados = products.filter(p=>p.promo || ["Alimento perro","Alimento gato"].includes(p.tipo)).slice(0,8);
+  document.getElementById("vitrina-grid").innerHTML = destacados.map(p=>`
+    <div class="vitem">
+      <div class="vemoji">${p.emoji}</div>
+      <div class="vinfo">
+        <div class="nm">${p.nombre}</div>
+        <div class="desc">${p.detalle}</div>
+        <div class="pr">${CLP(p.precio)}</div>
+      </div>
+    </div>`).join("");
+}
+
+/* ============================================================
+   REPORTES
+   ============================================================ */
+function renderReportes(){
+  const dias = [["Mi",380],["Ju",420],["Vi",510],["Sá",680],["Do",290],["Lu",395],["Ma",429]];
+  const max = Math.max(...dias.map(d=>d[1]));
+  document.getElementById("report-bars").innerHTML = dias.map(([d,v])=>
+    `<div class="col"><i style="height:${v/max*100}%"></i><span>${d}</span></div>`).join("");
+  const top = [
+    ["Alimento Perro Adulto 15 kg","34 vendidos"],
+    ["Alimento Gato Esterilizado 7.5 kg","28 vendidos"],
+    ["Arena Sanitaria 10 kg","22 vendidos"],
+    ["Juguete Kong Talla M","17 vendidos"]
+  ];
+  document.getElementById("report-top").innerHTML = top.map(([n,v])=>
+    `<tr><td><b>${n}</b></td><td style="text-align:right; color:var(--brand); font-weight:800;">${v}</td></tr>`).join("");
+}
+
+/* ============================================================
+   STAFF
+   ============================================================ */
+const staff = [
+  {n:"Andrés Monjes", rol:"Dueño · administración"},
+  {n:"Camila Rojas", rol:"Vendedora · turno mañana"},
+  {n:"Diego Muñoz", rol:"Bodega y despacho"},
+  {n:"Sofía Vargas", rol:"Peluquera canina"},
+  {n:"Martín Lagos", rol:"Veterinario"},
+  {n:"Pablo Salinas", rol:"Repartidor"},
+];
+function renderStaff(){
+  document.getElementById("staff-body").innerHTML = staff.map(s=>
+    `<tr><td><b>${s.n}</b></td><td style="color:var(--ink-3);">${s.rol}</td></tr>`).join("");
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+renderCatalogFilters();
+renderCatalog();
+renderRecompras();
+renderFeedback();
+renderSuscripciones();
+renderTimeline();
+renderRacionador();
+renderQuick();
+quickCalc();
+renderPosGrid();
+renderCart();
+renderKanban();
+renderServicios();
+renderMascotas();
+renderInventario();
+renderProveedores();
+renderMargenes();
+renderVitrina();
+renderReportes();
+renderStaff();
+
+window.addEventListener("resize", ()=>{ if(window.innerWidth > 780) closeDrawer(); });
+
+let touchStartX = 0;
+document.addEventListener("touchstart", e=>{ touchStartX = e.touches[0].clientX; }, {passive:true});
+document.addEventListener("touchend", e=>{
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  const sb = document.getElementById("sidebar");
+  if(touchStartX < 30 && dx > 60 && !sb.classList.contains("open")) toggleDrawer();
+  if(sb.classList.contains("open") && dx < -60) closeDrawer();
+}, {passive:true});
+</script>
+</body>
+</html>
